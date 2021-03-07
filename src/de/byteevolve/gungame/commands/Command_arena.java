@@ -1,0 +1,76 @@
+package de.byteevolve.gungame.commands;
+
+import de.byteevolve.gungame.GunGame;
+import de.byteevolve.gungame.arena.Arena;
+import de.byteevolve.gungame.player.PlayerHandler;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class Command_arena implements CommandExecutor {
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+        if(!(sender instanceof Player)) {
+            sender.sendMessage(GunGame.getInstance().getMustAPlayer());
+            return true;
+        }
+
+        Player player = (Player) sender;
+
+        if(!player.hasPermission("GunGame.arena")) {
+            player.sendMessage(GunGame.getInstance().getNoPerm());
+            return true;
+        }
+
+        if(args.length >= 3){
+            if(args[0].equalsIgnoreCase("create")){
+                String dpn = "";
+                for (int i = 2; i < args.length; i++) {
+                    dpn = dpn + args[i] + " ";
+                }
+                if(GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().containsKey(player)){
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§cDu erstellst schon eine Arena");
+                    return true;
+                }
+
+                if(GunGame.getInstance().getArenaHandler().existArenaByName(args[1]) || GunGame.getInstance().getArenaHandler().existArenaPlayerCreateByName(args[1])){
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§7Die Arena: §a" + args[1] + " §7gibt es schon.");
+                    return true;
+                }
+
+                Arena arena = new Arena(args[1]);
+                arena.setDisplayname(dpn);
+                GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().put(player, arena);
+                player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du erstellst nun die Arena: §a" + args[1] + "§7. (§2/arena edit§7)");
+                return true;
+            }
+        }
+
+        if(args.length == 2) {
+            switch (args[0].toLowerCase()) {
+                case "edit":
+                    if (GunGame.getInstance().getArenaHandler().existArenaByName(args[1])) {
+                        new PlayerHandler(player).openArenaEditMainInv(GunGame.getInstance().getArenaHandler().getArenaByName(args[1]));
+                    } else
+                        player.sendMessage(GunGame.getInstance().getPrefix() + "§7Die Arena: §a" + args[1] + " §7gibt es nicht.");
+                    break;
+                case "delete":
+                    break;
+            }
+        }
+        if(args.length == 1){
+            if(args[0].equalsIgnoreCase("edit")){
+            if(GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().containsKey(player))
+                new PlayerHandler(player).openArenaEditMainInv(GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().get(player));
+            else player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du erstellst gerade keine Arena. (§2/arena create Name§7)");
+        }else player.sendMessage(GunGame.getInstance().getPrefix() + "§7Nutze §c/arena §7<§ccreate§7,§cedit§7> §7<§cName§7> §7<§cDisplayname§7>");
+    }else player.sendMessage(GunGame.getInstance().getPrefix() + "§7Nutze §c/arena §7<§ccreate§7,§cedit§7> §7<§cName§7> §7<§cDisplayname§7>");
+
+
+
+
+        return true;
+    }
+}

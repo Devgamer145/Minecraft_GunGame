@@ -1,0 +1,9 @@
+name: GunGame
+author: RoyalByte
+main: de.byteevolve.gungame.GunGame
+version: 0.1
+commands:
+  arena:
+  build:
+  team:
+  stats:
