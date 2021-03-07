@@ -45,7 +45,7 @@ public class GunGame extends JavaPlugin {
         this.mustAPlayer = this.prefix + "§7Du musst ein §bSpieler §7sein!";
         this.playerNotOnline = this.prefix + "§7Der Angegebene Spieler konnte nicht gefunden werden.";
 
-        this.mySQL = new MySQL("localhost", "root", "i?CplHgqIZ-!", "gungame", 3306);
+        this.mySQL = new MySQL("localhost", "root", "passwd", "gungame", 3306);
         this.locationHandler = new LocationHandler();
         this.arenaHandler = new ArenaHandler();
         this.gameHandler = new GameHandler();
