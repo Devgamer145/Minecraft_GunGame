@@ -3,7 +3,13 @@ package de.byteevolve.gungame.arena;
 import de.byteevolve.gungame.GunGame;
 import org.bukkit.Location;
 
-import java.awt.geom.Area;
+/**
+ * Arena dient zum erstellen eigener Maps für das Gungame System.
+ * @author RoyalByte | Adrian Schiel
+ * @since 0.1
+ * @version 1.0
+ * @see ArenaHandler
+ */
 
 public class Arena {
 
@@ -11,10 +17,17 @@ public class Arena {
     private ArenaTeamState arenaTeamState;
     private int finished;
 
+    /**
+     * Konstruktor für die Klasse {@link Arena}
+     * @param name der Name der Arena
+     */
     public Arena(String name) {
         this.name = name;
     }
 
+    /**
+     * Speicher die Arena in der SQL Datenbank
+     */
     public void update(){
         if(getArenaTeamState() == null) setArenaTeamState(ArenaTeamState.DISALLOWED);
         if(getSpawn() == null) setSpawn("");
@@ -34,7 +47,11 @@ public class Arena {
         }
     }
 
-
+    /**
+     * Liefert einen Boolean, ob ein eine Location am Spawn ist
+     * @param location die Location welche abgefragt wird
+     * @return boolean, ob eine Location sich am spawn befindet.
+     */
     public boolean atSpawn(Location location){
         Location min = GunGame.getInstance().getLocationHandler().getLocByName(this.minSpawn).getAsLocation();
         Location max = GunGame.getInstance().getLocationHandler().getLocByName(this.maxSpawn).getAsLocation();
@@ -51,7 +68,11 @@ public class Arena {
     }
 
 
-
+    /**
+     * Liefert den {@link ArenaState} über die ID des states
+     * @param state ID des ArenaStates
+     * @return ArenaState welcher ermittelt wird
+     */
     public ArenaState getArenaStateFromInt(int state){
         switch (state){
             case 1:
@@ -61,58 +82,119 @@ public class Arena {
         }
     }
 
+    /**
+     * Liefert den Status der Arena
+     * @return Status der Arena
+     */
     public int getFinished() {
         return finished;
     }
 
+    /**
+     * Setzt den Status der Arena
+     * @param finished neuer Status der Arena
+     */
     public void setFinished(int finished) {
         this.finished = finished;
     }
 
+    /**
+     * Gibt den TeamStatus der Arena wieder (Teams erlaubt, Teams verboten)
+     * @return TeamStatus
+     */
     public ArenaTeamState getArenaTeamState() {
         return arenaTeamState;
     }
 
+    /**
+     * Setzt den TeamStatus der Arena
+     * @param arenaTeamState neuer TeamState
+     */
     public void setArenaTeamState(ArenaTeamState arenaTeamState) {
         this.arenaTeamState = arenaTeamState;
     }
 
+    /**
+     * Gibt den SpawnNamen wieder
+     * @see de.byteevolve.gungame.location.Loc
+     * @return SpawnName
+     */
     public String getSpawn() {
         return spawn;
     }
 
+    /**
+     * Setzt den SpawnNamen
+     * @see de.byteevolve.gungame.location.Loc
+     * @param spawn neuer Spawnname
+     */
     public void setSpawn(String spawn) {
         this.spawn = spawn;
     }
 
+    /**
+     * Gibt den MinSpawnNamen wieder
+     * @see de.byteevolve.gungame.location.Loc
+     * @return MinSpawnName
+     */
     public String getMinSpawn() {
         return minSpawn;
     }
 
+    /**
+     * Setzt den MinSpawnNamem
+     * @see de.byteevolve.gungame.location.Loc
+     * @param minSpawn neuer MinSpawnname
+     */
     public void setMinSpawn(String minSpawn) {
         this.minSpawn = minSpawn;
     }
-
+    /**
+     * Gibt den MaxSpawnNamen wieder
+     * @see de.byteevolve.gungame.location.Loc
+     * @return MaxSpawnName
+     */
     public String getMaxSpawn() {
         return maxSpawn;
     }
 
+    /**
+     * Setzt den MaxSpawnNamem
+     * @see de.byteevolve.gungame.location.Loc
+     * @param maxSpawn neuer MaxSpawnname
+     */
     public void setMaxSpawn(String maxSpawn) {
         this.maxSpawn = maxSpawn;
     }
 
+    /**
+     * Gibt den Anzeigenamen der Arena wieder
+     * @return Anzeigename
+     */
     public String getDisplayname() {
         return displayname;
     }
 
+    /**
+     * Setzt den neuen Anzeigenamen der Arena
+     * @param displayname neuer Anzeigename
+     */
     public void setDisplayname(String displayname) {
         this.displayname = displayname;
     }
 
+    /**
+     * Gibt den Absoluten Namen der Arena wieder
+     * @return absoluter Name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Setzt den Absoluten Namen der Arena
+     * @param name neuer absoluter Name
+     */
     public void setName(String name) {
         this.name = name;
     }
