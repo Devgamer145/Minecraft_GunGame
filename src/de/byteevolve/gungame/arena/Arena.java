@@ -26,7 +26,7 @@ public class Arena {
     }
 
     /**
-     * Speicher die Arena in der SQL Datenbank
+     * Speichert die Arena in der SQL Datenbank
      */
     public void update(){
         if(getArenaTeamState() == null) setArenaTeamState(ArenaTeamState.DISALLOWED);
