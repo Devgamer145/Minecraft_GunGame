@@ -209,6 +209,15 @@ public class Command_Team implements CommandExecutor {
                         player.sendMessage(GunGame.getInstance().getPrefix() + "§cBitte nutze /team kick <Player>");
                     }
                     break;
+                default:
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§aInformationen zum Teamsystem");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§a/team invite §7<§aSpieler§7> §7Lädt einen Spieler in das Team ein");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§a/team accept §7Nimmt eine Anfrage an");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§a/team deny §7Lehnt eine Anfrage ab");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§a/team info §7Zeigt alle Mitglieder deines Teams an");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§a/team leave §7Verlässt das Team");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§a/team kick §7<§aSpieler§7> Kickt einen Spieler aus dem Team");
+                    break;
             }
 
         }else sender.sendMessage(GunGame.getInstance().getMustAPlayer());
