@@ -94,6 +94,7 @@ public class Listener_Game implements Listener {
             newKitKiller.getKitInventory().load(killer);
             PlayerStats playerStats = new PlayerStats(killer.getUniqueId().toString());
             playerStats.add(PlayerStatsType.KILLS, 1);
+            playerStats.add(PlayerStatsType.POINTS, 10);
             if(playerStats.get(PlayerStatsType.HIGHSCORE) < newKitKiller.getId()) playerStats.set(PlayerStatsType.HIGHSCORE, newKitKiller.getId());
             new PlayerHandler(killer).sendScoreBoard();
 
@@ -122,7 +123,9 @@ public class Listener_Game implements Listener {
                 player.setLevel(newKit.getId());
             }
         }.runTaskLater(GunGame.getInstance(), 10);
-        new PlayerStats(player.getUniqueId().toString()).add(PlayerStatsType.DEATHS, 1);
+        PlayerStats playerStats = new PlayerStats(player.getUniqueId().toString());
+        playerStats.add(PlayerStatsType.DEATHS, 1);
+        playerStats.remove(PlayerStatsType.POINTS, 5);
         new PlayerHandler(player).sendScoreBoard();
         event.setRespawnLocation(GunGame.getInstance().getLocationHandler().getLocByName(GunGame.getInstance().getGameHandler().getCurrent().getSpawn()).getAsLocation());
 

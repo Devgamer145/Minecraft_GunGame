@@ -38,7 +38,7 @@ public class PlayerStats {
                 GunGame gunGame = GunGame.getInstance();
                 MySQL mySQL = gunGame.getMySQL();
                 mySQL.update("INSERT INTO gg_stats VALUES('" +getUUID() +"', '"+ getName() +"',"
-                        + "'0', '0', '0');");
+                        + "'0', '0', '0', '0');");
         }
     }
 
