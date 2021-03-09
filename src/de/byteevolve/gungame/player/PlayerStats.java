@@ -67,7 +67,9 @@ public class PlayerStats {
         set(type ,get(type) + value);
     }
     public void remove(PlayerStatsType type, int value) {
-        set(type ,get(type) - value);
+        if(get(type)- value <= 0){
+            set(type,0);
+        }else set(type ,get(type) - value);
     }
 
     public void set(PlayerStatsType type, int value) {
@@ -84,6 +86,26 @@ public class PlayerStats {
     }
     private String getUUID() {
         return this.uuid;
+    }
+
+    public Integer getRank() {
+        HashMap<Integer, String> rang = new HashMap<>();
+        try {
+            ResultSet rs = GunGame.getInstance().getMySQL().getResult("SELECT UUID FROM gg_stats ORDER BY POINTS DESC LIMIT 1000");
+            int in = 0;
+            try {
+                while (rs.next()) {
+                    in++;
+                    if (rs.getString("UUID").equalsIgnoreCase(uuid))
+                        return Integer.valueOf(in);
+                    if (in == 1000)
+                        return Integer.valueOf(-1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception exception) {}
+        return null;
     }
 
 

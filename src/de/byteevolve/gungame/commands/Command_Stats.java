@@ -25,7 +25,9 @@ public class Command_Stats implements CommandExecutor {
                     player.sendMessage(GunGame.getInstance().getPrefix() + "§7Kills: §a" + playerStats.get(PlayerStatsType.KILLS));
                     player.sendMessage(GunGame.getInstance().getPrefix() + "§7Tode: §a" + playerStats.get(PlayerStatsType.DEATHS));
                     player.sendMessage(GunGame.getInstance().getPrefix() + "§7Rekord: §a" + playerStats.get(PlayerStatsType.HIGHSCORE));
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§7Punkte: §a" + playerStats.get(PlayerStatsType.POINTS));
                     player.sendMessage(GunGame.getInstance().getPrefix() + "§7KD: §a" + playerStats.getKD());
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§7Rank: §a#" + playerStats.getRank());
                     player.sendMessage(GunGame.getInstance().getPrefix() +"§7§m§l-------------------------------------");
                 }else player.sendMessage(GunGame.getInstance().getPlayerNotOnline());
             }else{
@@ -34,7 +36,9 @@ public class Command_Stats implements CommandExecutor {
                 player.sendMessage(GunGame.getInstance().getPrefix() + "§7Kills: §a" + playerStats.get(PlayerStatsType.KILLS));
                 player.sendMessage(GunGame.getInstance().getPrefix() + "§7Tode: §a" + playerStats.get(PlayerStatsType.DEATHS));
                 player.sendMessage(GunGame.getInstance().getPrefix() + "§7Rekord: §a" + playerStats.get(PlayerStatsType.HIGHSCORE));
+                player.sendMessage(GunGame.getInstance().getPrefix() + "§7Punkte: §a" + playerStats.get(PlayerStatsType.POINTS));
                 player.sendMessage(GunGame.getInstance().getPrefix() + "§7KD: §a" + playerStats.getKD());
+                player.sendMessage(GunGame.getInstance().getPrefix() + "§7Rank: §a#" + playerStats.getRank());
                 player.sendMessage(GunGame.getInstance().getPrefix() +"§7§m§l-------------------------------------");
             }
         }else sender.sendMessage(GunGame.getInstance().getMustAPlayer());
