@@ -56,6 +56,9 @@ public class PlayerHandler {
         ScoreboardScore a10 = new ScoreboardScore(sb, obj, " " + "§d");
         ScoreboardScore a11 = new ScoreboardScore(sb, obj, "§c❤ §8▎ §7Kills");
         ScoreboardScore a12 = new ScoreboardScore(sb, obj, " §8➥ §7" + playerStats.get(PlayerStatsType.KILLS));
+        ScoreboardScore a13 = new ScoreboardScore(sb, obj, " " + "§1");
+        ScoreboardScore a14 = new ScoreboardScore(sb, obj, "§c✿ §8▎ §7Rang");
+        ScoreboardScore a15 = new ScoreboardScore(sb, obj, " §8➥ §7#" + playerStats.getRank());
         ScoreboardScore a19 = new ScoreboardScore(sb, obj, "§8§M§l------------" + "§3");
 
         a.setScore(17);
@@ -67,7 +70,10 @@ public class PlayerHandler {
         a10.setScore(8);
         a11.setScore(7);
         a12.setScore(6);
-        a19.setScore(5);
+        a13.setScore(5);
+        a14.setScore(4);
+        a15.setScore(3);
+        a19.setScore(2);
 
         PacketPlayOutScoreboardObjective removePacket = new PacketPlayOutScoreboardObjective(obj, 1);
         PacketPlayOutScoreboardScore pa1 = new PacketPlayOutScoreboardScore(a);
@@ -80,6 +86,9 @@ public class PlayerHandler {
         PacketPlayOutScoreboardScore pa11 = new PacketPlayOutScoreboardScore(a11);
         PacketPlayOutScoreboardScore pa12 = new PacketPlayOutScoreboardScore(a12);
         PacketPlayOutScoreboardScore pa19 = new PacketPlayOutScoreboardScore(a19);
+        PacketPlayOutScoreboardScore pa13 = new PacketPlayOutScoreboardScore(a13);
+        PacketPlayOutScoreboardScore pa14 = new PacketPlayOutScoreboardScore(a14);
+        PacketPlayOutScoreboardScore pa15 = new PacketPlayOutScoreboardScore(a15);
 
         sendPacket(removePacket);
         sendPacket(createpacket);
@@ -94,6 +103,9 @@ public class PlayerHandler {
         sendPacket(pa11);
         sendPacket(pa12);
         sendPacket(pa19);
+        sendPacket(pa13);
+        sendPacket(pa14);
+        sendPacket(pa15);
 
     }
 
