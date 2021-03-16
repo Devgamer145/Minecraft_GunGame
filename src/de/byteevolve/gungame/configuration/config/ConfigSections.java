@@ -1,0 +1,48 @@
+package de.byteevolve.gungame.configuration.config;
+
+import de.byteevolve.gungame.configuration.ConfigEntry;
+import de.byteevolve.gungame.configuration.ConfigSection;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
+public enum ConfigSections implements ConfigSection {
+    MYSQL("mysql", "Hier musst du deine Datenbank Einstellungen treffen");
+
+    private String name, desc;
+
+    ConfigSections(String name, String desc){
+        this.name = name;
+        this.desc = desc;
+    }
+
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public List<ConfigEntries> getEntries() {
+        List<ConfigEntries> tmp = new ArrayList<>();
+        for(ConfigEntries entry : ConfigEntries.values()){
+            if(entry.getSection().equals(this))
+                tmp.add(entry);
+        }
+        return tmp;
+    }
+
+    @Override
+    public ConfigEntry getEntry(String name) {
+        for(ConfigEntries entry : ConfigEntries.values())
+            if(entry.getPath().equals(name)) return entry;
+
+            return null;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.desc;
+    }
+}

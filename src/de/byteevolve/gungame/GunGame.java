@@ -7,6 +7,8 @@ import de.byteevolve.gungame.commands.Command_Stats;
 import de.byteevolve.gungame.commands.Command_Team;
 import de.byteevolve.gungame.commands.Command_arena;
 import de.byteevolve.gungame.commands.Command_build;
+import de.byteevolve.gungame.configuration.ConfigHandler;
+import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.database.MySQL;
 import de.byteevolve.gungame.game.GameHandler;
 import de.byteevolve.gungame.kit.Kit;
@@ -34,6 +36,7 @@ public class GunGame extends JavaPlugin {
     private TeamHandler teamHandler;
     private String prefix,noPerm, mustAPlayer,playerNotOnline;
     private List<UUID> build;
+    private ConfigHandler configHandler;
 
 
     @Override
@@ -44,8 +47,8 @@ public class GunGame extends JavaPlugin {
         this.noPerm = this.prefix + "§7Du bist nicht berechtigt dieses Kommando zu verwenden.";
         this.mustAPlayer = this.prefix + "§7Du musst ein §bSpieler §7sein!";
         this.playerNotOnline = this.prefix + "§7Der Angegebene Spieler konnte nicht gefunden werden.";
-
-        this.mySQL = new MySQL("localhost", "root", "passwd", "gungame", 3306);
+        this.configHandler = new ConfigHandler();
+        this.mySQL = new MySQL((String) ConfigEntries.MYSQL_HOST.getValue(), "root", "", "gungame", 3306);
         this.locationHandler = new LocationHandler();
         this.arenaHandler = new ArenaHandler();
         this.gameHandler = new GameHandler();

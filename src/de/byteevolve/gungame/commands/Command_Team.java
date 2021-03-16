@@ -3,7 +3,6 @@ package de.byteevolve.gungame.commands;
 import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.arena.ArenaTeamState;
 import de.byteevolve.gungame.team.Team;
-import javafx.print.PageLayout;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.Bukkit;
@@ -13,7 +12,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import java.util.Locale;
 import java.util.UUID;
 
 public class Command_Team implements CommandExecutor {
