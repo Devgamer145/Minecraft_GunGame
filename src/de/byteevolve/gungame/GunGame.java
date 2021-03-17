@@ -42,13 +42,15 @@ public class GunGame extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
-        this.prefix = "§8▎ §aGun§2Game §8× §7";
-        this.noPerm = this.prefix + "§7Du bist nicht berechtigt dieses Kommando zu verwenden.";
-        this.mustAPlayer = this.prefix + "§7Du musst ein §bSpieler §7sein!";
-        this.playerNotOnline = this.prefix + "§7Der Angegebene Spieler konnte nicht gefunden werden.";
         this.configHandler = new ConfigHandler();
-        this.mySQL = new MySQL((String) ConfigEntries.MYSQL_HOST.getValue(), "root", "", "gungame", 3306);
+
+        this.prefix = ConfigEntries.PREFIX.getAsString();
+        this.noPerm = this.prefix + ConfigEntries.NOPERM.getAsString();
+        this.mustAPlayer = this.prefix + ConfigEntries.MUSTAPLAYER.getAsString();
+        this.playerNotOnline = this.prefix + ConfigEntries.PLAYERNOTONLINE.getAsString();
+        this.mySQL = new MySQL(ConfigEntries.MYSQL_HOST.getAsString(), ConfigEntries.MYSQL_USERNAME.getAsString(),
+                ConfigEntries.MYSQL_PASSWORD.getAsString(), ConfigEntries.MYSQL_DATABASE.getAsString(),
+                ConfigEntries.MYSQL_PORT.getAsInt());
         this.locationHandler = new LocationHandler();
         this.arenaHandler = new ArenaHandler();
         this.gameHandler = new GameHandler();
@@ -63,7 +65,7 @@ public class GunGame extends JavaPlugin {
         getCommand("arena").setExecutor(new Command_arena());
         getCommand("build").setExecutor(new Command_build());
         getCommand("team").setExecutor(new Command_Team());
-        getCommand("stats").setExecutor((CommandExecutor) new Command_Stats());
+        getCommand("stats").setExecutor(new Command_Stats());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new Listener_ArenaEdit(), this);
@@ -76,7 +78,7 @@ public class GunGame extends JavaPlugin {
             if(GunGame.getInstance().getGameHandler().getCurrent() != null){
                 player.teleport(GunGame.getInstance().getLocationHandler().getLocByName(GunGame.getInstance().getGameHandler().getCurrent().getSpawn()).getAsLocation());
             }else{
-                player.sendMessage(GunGame.getInstance().getPrefix() + "§cEs wurde noch keine Arena erstellt.");
+                player.sendMessage(getPrefix() + "§cEs wurde noch keine Arena erstellt.");
             }
                 GunGame.getInstance().getGameHandler().getPlayerkits().put(player, Kit.LEVEL_0);
                 GunGame.getInstance().getGameHandler().getPlayerkits().get(player).getKitInventory().load(player);

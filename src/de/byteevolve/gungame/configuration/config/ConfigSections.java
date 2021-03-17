@@ -3,11 +3,11 @@ package de.byteevolve.gungame.configuration.config;
 import de.byteevolve.gungame.configuration.ConfigEntry;
 import de.byteevolve.gungame.configuration.ConfigSection;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public enum ConfigSections implements ConfigSection {
+    MESSAGES("messages", "Alle Einstellungen zu den Chat Nachrichten."),
     MYSQL("mysql", "Hier musst du deine Datenbank Einstellungen treffen");
 
     private String name, desc;
