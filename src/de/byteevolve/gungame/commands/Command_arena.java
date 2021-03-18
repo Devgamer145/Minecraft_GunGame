@@ -2,6 +2,7 @@ package de.byteevolve.gungame.commands;
 
 import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.arena.Arena;
+import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.player.PlayerHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,19 +32,19 @@ public class Command_arena implements CommandExecutor {
                     dpn = dpn + args[i] + " ";
                 }
                 if(GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().containsKey(player)){
-                    player.sendMessage(GunGame.getInstance().getPrefix() + "§cDu erstellst schon eine Arena");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERCREATESARENA.getAsString());
                     return true;
                 }
 
                 if(GunGame.getInstance().getArenaHandler().existArenaByName(args[1]) || GunGame.getInstance().getArenaHandler().existArenaPlayerCreateByName(args[1])){
-                    player.sendMessage(GunGame.getInstance().getPrefix() + "§7Die Arena: §a" + args[1] + " §7gibt es schon.");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.ARENAEXISTS.getAsString().replaceAll("%ARENANAME%", args[1]));
                     return true;
                 }
 
                 Arena arena = new Arena(args[1]);
                 arena.setDisplayname(dpn);
                 GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().put(player, arena);
-                player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du erstellst nun die Arena: §a" + args[1] + "§7. (§2/arena edit§7)");
+                player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERCREATEARENA.getAsString().replaceAll("%ARENANAME%", args[1]));
                 return true;
             }
         }
@@ -54,7 +55,7 @@ public class Command_arena implements CommandExecutor {
                     if (GunGame.getInstance().getArenaHandler().existArenaByName(args[1])) {
                         new PlayerHandler(player).openArenaEditMainInv(GunGame.getInstance().getArenaHandler().getArenaByName(args[1]));
                     } else
-                        player.sendMessage(GunGame.getInstance().getPrefix() + "§7Die Arena: §a" + args[1] + " §7gibt es nicht.");
+                        player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.ARENANOTEXISTS.getAsString().replaceAll("%ARENANAME%", args[1]));
                     break;
                 case "delete":
                     break;
@@ -64,9 +65,9 @@ public class Command_arena implements CommandExecutor {
             if(args[0].equalsIgnoreCase("edit")){
             if(GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().containsKey(player))
                 new PlayerHandler(player).openArenaEditMainInv(GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().get(player));
-            else player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du erstellst gerade keine Arena. (§2/arena create Name§7)");
-        }else player.sendMessage(GunGame.getInstance().getPrefix() + "§7Nutze §c/arena §7<§ccreate§7,§cedit§7> §7<§cName§7> §7<§cDisplayname§7>");
-    }else player.sendMessage(GunGame.getInstance().getPrefix() + "§7Nutze §c/arena §7<§ccreate§7,§cedit§7> §7<§cName§7> §7<§cDisplayname§7>");
+            else player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERNOTCREATESARENA.getAsString());
+        }else player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.ARENAHELP.getAsString());
+    }else player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.ARENAHELP.getAsString());
 
 
 

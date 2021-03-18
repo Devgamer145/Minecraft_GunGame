@@ -38,7 +38,7 @@ public class Arena {
             GunGame.getInstance().getMySQL().update("UPDATE gg_arena SET " +
                     "DISPLAYNAME='" +getDisplayname() +"', SPAWN='" + getSpawn()+ "',"+
                     "MAXSPAWN='" + getMaxSpawn()+"', MINSPAWN='" + getMinSpawn()+"',"+
-                    "TEAMSTATE='" +getArenaTeamState().toString()+ "' FINISHED='" + getFinished() +"' WHERE NAME='" + getName()+"';");
+                    "TEAMSTATE='" +getArenaTeamState().toString()+ "', FINISHED='" + getFinished() +"' WHERE NAME='" + getName()+"';");
             GunGame.getInstance().getArenaHandler().loadArenas();
         } else {
             GunGame.getInstance().getMySQL().update("INSERT INTO gg_arena VALUES('" +getName() +"', '" + getDisplayname()+"','" +
