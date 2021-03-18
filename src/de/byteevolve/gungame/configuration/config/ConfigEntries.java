@@ -17,6 +17,11 @@ public enum ConfigEntries implements ConfigEntry {
     ARENANOTEXISTS(ConfigSections.MESSAGES, "arenanotexists",  "&7Die Arena:&a %ARENANAME% &7gibt es nicht.", "&7Die Arena:&a %ARENANAME% &7gibt es nicht.", "Nachricht wenn es eine Arena nicht gibt. \n%ARENANAME% = Platzhalter für den Arenanamen"),
     PLAYERNOTCREATESARENA(ConfigSections.MESSAGES, "playernotcreatesarena", "&7Du erstellst gerade keine Arena. (&2/arena create Name&7)", "&7Du erstellst gerade keine Arena. (&2/arena create Name&7)", "Nachricht wenn ein Spieler eine Arena mit /arena edit bearbeiten will, aber keine erstellt."),
     ARENAHELP(ConfigSections.MESSAGES, "arenahelp", "&7Nutze &c/arena &7<&ccreate&7,&cedit&7> &7<&cName&7> &7<&cDisplayname&7>", "&7Nutze &c/arena &7<&ccreate&7,&cedit&7> &7<&cName&7> &7<&cDisplayname&7>", "Hilfe Nachricht zum erstellen einer Arena"),
+    NOARENAEXISTS(ConfigSections.MESSAGES, "noarenaexists","&cEs wurde noch keine Arena erstellt.", "&cEs wurde noch keine Arena erstellt.", "Nachricht an einen Spieler, wenn keine Arena gefunden wurde."),
+
+    //BUILD COMMAND
+    BUILDON(ConfigSections.MESSAGES, "buildon", "&7Du bist nun im &aBuild-Modus&7.","&7Du bist nun im &aBuild-Modus&7.", "Nachricht an einen Spieler, welcher in den Build Modus geht."),
+    BUILDOFF(ConfigSections.MESSAGES, "buildoff", "&7Du bist nun &cnicht &7mehr im &aBuild-Modus&7.","&7Du bist nun &cnicht &7mehr im &aBuild-Modus&7.", "Nachricht an einen Spieler, welcher aus dem Build Modus geht."),
 
 
     //MYSQL
