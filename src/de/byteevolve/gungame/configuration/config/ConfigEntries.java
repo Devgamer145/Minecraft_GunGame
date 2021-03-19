@@ -24,7 +24,7 @@ public enum ConfigEntries implements ConfigEntry {
     BUILDOFF(ConfigSections.MESSAGES, "buildoff", "&7Du bist nun &cnicht &7mehr im &aBuild-Modus&7.","&7Du bist nun &cnicht &7mehr im &aBuild-Modus&7.", "Nachricht an einen Spieler, welcher aus dem Build Modus geht."),
 
     //STATS COMMAND
-    STATS(ConfigSections.MESSAGES, "stats", "&m&l&7-------- &aStats&7 -&a %PLAYER% &m&l&7-------- \n &7Kills:&a %KILLS% \n &7Tode:&a %DEAHTS% \n &7Rekord:&a %HIGHSCORE% \n &7Punkte:&a %POINTS% \n &7KD:&a %KD% \n &7Rang:&a #%RANK% \n &7&m&l-------------------------------------", "&m&l&7-------- &aStats&7 -&a %PLAYER% &m&l&7-------- \n &7Kills:&a %KILLS% \n &7Tode:&a %DEAHTS% \n &7Rekord:&a %HIGHSCORE% \n &7Punkte:&a %POINTS% \n &7KD:&a %KD% \n &7Rang:&a #%RANK% \n &7&m&l-------------------------------------", "lalala"),
+    STATS(ConfigSections.MESSAGES, "stats", "&m&l&7-------- &aStats&7 -&a %PLAYER% &m&l&7-------- \n &7Kills:&a %KILLS% \n &7Tode:&a %DEAHTS% \n &7Rekord:&a %HIGHSCORE% \n &7Punkte:&a %POINTS% \n &7KD:&a %KD% \n &7Rang:&a #%RANK% \n &7&m&l-------------------------------------", "&m&l&7-------- &aStats&7 -&a %PLAYER% &m&l&7-------- \n &7Kills:&a %KILLS% \n &7Tode:&a %DEAHTS% \n &7Rekord:&a %HIGHSCORE% \n &7Punkte:&a %POINTS% \n &7KD:&a %KD% \n &7Rang:&a #%RANK% \n &7&m&l-------------------------------------", "Nachrichten welche bei dem Command /stats kommen. \n %PLAYER% = Spielername \n %KILLS% = Kills von dem Spieler \n %DEAHTS% = Tode von dem Spieler \n %POINTS% = Punkte von dem Spieler \n %HIGHSCORE% = Rekord von dem Spieler \n %KD% = KD von dem Spieler \n %RANK% = Rang von dem Spieler"),
 
 
     //MYSQL
