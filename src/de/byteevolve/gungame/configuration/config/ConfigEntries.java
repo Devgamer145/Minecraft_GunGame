@@ -55,6 +55,16 @@ public enum ConfigEntries implements ConfigEntry {
     TEAMKICKHELP(ConfigSections.MESSAGES, "teamkickhelp", "&cBitte nutze /team kick <Player>", "&cBitte nutze /team kick <Player>", "Hilfe für den Command /team kick"),
     TEAMHELP(ConfigSections.MESSAGES, "teamhelp", "&aInformationen zum Teamsystem \n &a/team invite &7<&aSpieler&7> &7Lädt einen Spieler in das Team ein \n &a/team accept &7Nimmt eine Anfrage an \n &a/team deny &7Lehnt eine Anfrage ab \n &a/team info &7Zeigt alle Mitglieder deines Teams an \n &a/team leave &7Verlässt das Team \n &a/team kick &7<&aSpieler&7> Kickt einen Spieler aus dem Team", "&aInformationen zum Teamsystem \n &a/team invite &7<&aSpieler&7> &7Lädt einen Spieler in das Team ein \n &a/team accept &7Nimmt eine Anfrage an \n &a/team deny &7Lehnt eine Anfrage ab \n &a/team info &7Zeigt alle Mitglieder deines Teams an \n &a/team leave &7Verlässt das Team \n &a/team kick &7<&aSpieler&7> Kickt einen Spieler aus dem Team", "Hilfe NAchricht beim Command /team"),
 
+    //DEATH
+    PLAYERDEAD(ConfigSections.MESSAGES, "playerdead", "&7Du bist gestorben.", "&7Du bist gestorben.", "Nachricht wenn ein Spieler gestorben ist"),
+    PLAYERKILLED(ConfigSections.MESSAGES, "playerkilled", "&7Du wurdest von &c %KILLER% &7getötet.", "&7Du wurdest von &c %KILLER% &7getötet.", "Nachricht an einen Spieler, wenn er getötet wurde. \n %KILLER% = Name des Killers"),
+    KILLERKILLS(ConfigSections.MESSAGES, "killerkills", "&7Du hast&a %PLAYER% &7getötet.", "&7Du hast&a %PLAYER% &7getötet.", "Nachricht an einen Spieler, wenn er eienen anderen getötet hat. \n %PLAYER% = Getöteter Spieler"),
+
+    //MAPCHANGE
+    MAPCHANGE(ConfigSections.MESSAGES, "mapchange", "&7Die Map wurde auf&a %MAP% &7gesetzt.", "&7Die Map wurde auf&a %MAP% &7gesetzt.", "Nachricht wenn eine Map geändert wird."),
+    MAPCHANGETIMER(ConfigSections.MESSAGES, "mapchangetimer", "&7Die Map wechselt in &a%SECONDS%-Sekunden&7.", "&7Die Map wechselt in &a%SECONDS%-Sekunden&7.", "Nachricht wenn der MapChange Counter einen bestimmten Wert erreicht."),
+    MAPCHANGECOUNTER(ConfigSections.SETTINGS, "mapchangecounter", 30, 30,"Zeit wie lange eine Map in Minuten da ist, bis sie gewächselt wird"),
+
     //MYSQL
     MYSQL_HOST(ConfigSections.MYSQL, "host", "localhost", "localhost", "Hostname deiner MySQl Datenbank"),
     MYSQL_PASSWORD(ConfigSections.MYSQL, "password", "password", "password", "Passwort deiner MySQl Datenbank"),

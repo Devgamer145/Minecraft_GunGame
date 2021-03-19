@@ -3,6 +3,7 @@ package de.byteevolve.gungame.game;
 import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.arena.Arena;
 import de.byteevolve.gungame.arena.ArenaTeamState;
+import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.kit.Kit;
 import de.byteevolve.gungame.player.PlayerHandler;
 import org.bukkit.Bukkit;
@@ -52,7 +53,7 @@ public class GameHandler {
 
     public void startGameTimer() {
         new BukkitRunnable() {
-            int i = 30 * 60;
+            int i = ConfigEntries.MAPCHANGECOUNTER.getAsInt() * 60;
             int arena = 0;
             @Override
             public void run() {
@@ -61,17 +62,11 @@ public class GameHandler {
                 }
                 i--;
                 switch (i){
-                    case 300:
-                        Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Die Map wechselt in §a5-Minuten§7.");
-                        break;
-                    case 120:
-                        Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Die Map wechselt in §a2-Minuten§7.");
-                        break;
-                    case 60: case 30: case 15: case 10:
-                        Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Die Map wechselt in §a" + i +"-Sekunden§7.");
+                    case 300: case 120: case 60: case 30: case 15: case 10:
+                        Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGETIMER.getAsString().replaceAll("%SECONDS%", String.valueOf(i)));
                         break;
                     case 5: case 4: case 3: case 2:
-                        Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Die Map wechselt in §a" + i + "-Sekunden§7.");
+                        Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGETIMER.getAsString().replaceAll("%SECONDS%", String.valueOf(i)));
                         for(Player player : Bukkit.getOnlinePlayers()){
                             player.playSound(player.getLocation(), Sound.NOTE_BASS, 10, 10);
                         }
@@ -89,11 +84,11 @@ public class GameHandler {
                                 for(Player player : Bukkit.getOnlinePlayers()){
                                     if(GunGame.getInstance().getTeamHandler().inTeam(player.getUniqueId().toString())!= null) {
                                         if (getCurrent().getArenaTeamState().equals(ArenaTeamState.DISALLOWED)) {
-                                            player.sendMessage(GunGame.getInstance().getPrefix() + "§cDein Team wurde aufgelöst.");
+                                            player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMDELETE.getAsString());
                                         }
                                     }
                                     player.playSound(player.getLocation(), Sound.LEVEL_UP, 10, 10);
-                                    player.sendMessage(GunGame.getInstance().getPrefix() + "§7Die Map wurde auf §a" + getCurrent().getDisplayname().replaceAll("&", "§") + " §7gesetzt.");
+                                    player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGE.getAsString().replaceAll("%MAP%", getCurrent().getDisplayname().replaceAll("&", "§")));
                                     new PlayerHandler(player).sendScoreBoard();
                                     GunGame.getInstance().getGameHandler().getPlayerkits().put(player, Kit.LEVEL_0);
                                     GunGame.getInstance().getGameHandler().getPlayerkits().get(player).getKitInventory().load(player);

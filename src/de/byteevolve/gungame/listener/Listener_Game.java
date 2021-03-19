@@ -2,6 +2,7 @@ package de.byteevolve.gungame.listener;
 
 import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.arena.Arena;
+import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.kit.Kit;
 import de.byteevolve.gungame.player.PlayerHandler;
 import de.byteevolve.gungame.player.PlayerStats;
@@ -100,11 +101,11 @@ public class Listener_Game implements Listener {
 
             killer.setLevel(newKitKiller.getId());
             killer.setHealth(20);
-            killer.sendMessage(GunGame.getInstance().getPrefix() + "§7Du hast §a" + player.getDisplayName() + "§7 getötet.");
+            killer.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.KILLERKILLS.getAsString().replaceAll("%PLAYER%", player.getDisplayName()));
             killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 10, 10);
-            player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du wurdest von §c" + killer.getDisplayName() + "§7 getötet.");
+            player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERKILLED.getAsString().replaceAll("%KILLER%", killer.getDisplayName()));
         }else{
-            player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du bist gestorben.");
+            player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERDEAD.getAsString());
         }
         player.setVelocity(new Vector(0, 0, 0));
         player.spigot().respawn();
