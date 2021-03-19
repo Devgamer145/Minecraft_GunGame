@@ -78,12 +78,17 @@ public class GunGame extends JavaPlugin {
             if(GunGame.getInstance().getGameHandler().getCurrent() != null){
                 player.teleport(GunGame.getInstance().getLocationHandler().getLocByName(GunGame.getInstance().getGameHandler().getCurrent().getSpawn()).getAsLocation());
             }else{
-                player.sendMessage(getPrefix() + "§cEs wurde noch keine Arena erstellt.");
+                player.sendMessage(getPrefix() + ConfigEntries.NOARENAEXISTS.getAsString());
             }
                 GunGame.getInstance().getGameHandler().getPlayerkits().put(player, Kit.LEVEL_0);
                 GunGame.getInstance().getGameHandler().getPlayerkits().get(player).getKitInventory().load(player);
         }
 
+    }
+
+    @Override
+    public void onDisable() {
+        this.mySQL.close();
     }
 
     public TeamHandler getTeamHandler() {
