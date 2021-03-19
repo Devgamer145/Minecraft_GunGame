@@ -2,6 +2,7 @@ package de.byteevolve.gungame.commands;
 
 import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.arena.ArenaTeamState;
+import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.team.Team;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
@@ -20,7 +21,7 @@ public class Command_Team implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(sender instanceof Player){
             if(GunGame.getInstance().getGameHandler().getCurrent().getArenaTeamState().equals(ArenaTeamState.DISALLOWED)){
-                sender.sendMessage(GunGame.getInstance().getPrefix() + "§7Bei dieser §aMap §7kannst du diesen Command §cnicht §7benutzen.");
+                sender.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.NOTEAMALLOWED.getAsString());
                 return true;
             }
             Player player = (Player) sender;
@@ -57,21 +58,21 @@ public class Command_Team implements CommandExecutor {
                                                 "run_command\",\"value\":\"/team deny\"}}]}");
                                         PacketPlayOutChat packetPlayOutChat = new PacketPlayOutChat(iChatBaseComponent);
                                         ((CraftPlayer) toInvite).getHandle().playerConnection.sendPacket(packetPlayOutChat);
-                                        player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du hast §a" + toInvite.getDisplayName() + "§7 zu einem Team eingeladen.");
+                                        player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERTEAMINVITE.getAsString().replaceAll("%TARGET%", toInvite.getDisplayName()));
                                     }else {
-                                        player.sendMessage(GunGame.getInstance().getPrefix() + "§cDer Spieler ist schon in einem Team");
+                                        player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERINTEAM.getAsString());
                                     }
                                 } else {
                                     player.sendMessage(GunGame.getInstance().getPlayerNotOnline());
                                 }
                             } else {
-                                player.sendMessage(GunGame.getInstance().getPrefix() + "§cEs kann nur der Team-Inhaber andere einladen.");
+                                player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERCANTINVITETEAMMEMBER.getAsString());
                                 return true;
                             }
                         } else {
                             GunGame.getInstance().getTeamHandler().getTeams().put(player.getUniqueId().toString(), new Team(player.getUniqueId().toString()));
                             Team team = GunGame.getInstance().getTeamHandler().inTeam(player.getUniqueId().toString());
-                            player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du hast ein §aTeam §7erstellt.");
+                            player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMCREATE.getAsString());
                             if(Bukkit.getPlayer(args[1]) != null){
                                 Player toInvite = Bukkit.getPlayer(args[1]);
                                 if(GunGame.getInstance().getTeamHandler().inTeam(toInvite.getUniqueId().toString()) == null) {
@@ -88,9 +89,9 @@ public class Command_Team implements CommandExecutor {
                                             "run_command\",\"value\":\"/team deny\"}}]}");
                                     PacketPlayOutChat packetPlayOutChat = new PacketPlayOutChat(iChatBaseComponent);
                                     ((CraftPlayer) toInvite).getHandle().playerConnection.sendPacket(packetPlayOutChat);
-                                    player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du hast §a" + toInvite.getDisplayName() + "§7 zu einem Team eingeladen.");
+                                    player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERTEAMINVITE.getAsString().replaceAll("%TARGET%", toInvite.getDisplayName()));
                                 }else {
-                                    player.sendMessage(GunGame.getInstance().getPrefix() + "§cDer Spieler ist schon in einem Team");
+                                    player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERINTEAM.getAsString());
                                 }
                             } else {
                                 player.sendMessage(GunGame.getInstance().getPlayerNotOnline());
@@ -104,25 +105,25 @@ public class Command_Team implements CommandExecutor {
                     if(GunGame.getInstance().getTeamHandler().inTeam(player.getUniqueId().toString()) == null) {
                         if (GunGame.getInstance().getTeamHandler().hasInvite(player.getUniqueId().toString()) != null) {
                             Team team = GunGame.getInstance().getTeamHandler().hasInvite(player.getUniqueId().toString());
-                            if (team.getMembers().size() <= 2) {
+                            if (team.getMembers().size() <= ConfigEntries.TEAMSIZE.getAsInt()) {
                                 team.getInvites().remove(player.getUniqueId().toString());
                                 team.getMembers().add(player.getUniqueId().toString());
                                 for(String uuid : team.getMembers()){
                                     Player member = Bukkit.getPlayer(UUID.fromString(uuid));
-                                    member.sendMessage(GunGame.getInstance().getPrefix() + "§a" + player.getDisplayName() + "§7 ist dem Team §2beigetreten§7.");
+                                    member.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMJOIN.getAsString().replaceAll("%PLAYER%", player.getDisplayName()));
                                 }
                                 Player owner = Bukkit.getPlayer(UUID.fromString(team.getOwner()));
-                                owner.sendMessage(GunGame.getInstance().getPrefix() + "§a" + player.getDisplayName() + "§7 ist dem Team §2beigetreten§7.");
-                                player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du bist dem Team von §a" + owner.getDisplayName() + " §2beigetreten§7.");
+                                owner.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMJOIN.getAsString().replaceAll("%PLAYER%", player.getDisplayName()));
+                                player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMJOINPLAYER.getAsString().replaceAll("%OWNER%", owner.getDisplayName()));
                             } else {
-                                player.sendMessage(GunGame.getInstance().getPrefix() + "§cDas Team ist schon voll.");
+                                player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMFULL.getAsString());
                                 team.getInvites().remove(player.getUniqueId().toString());
                             }
                         } else {
-                            player.sendMessage(GunGame.getInstance().getPrefix() + "§cDu wurdest zu keinem Team eingeladen.");
+                            player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERHASNOTEAMINVITE.getAsString());
                         }
                     }else{
-                        player.sendMessage(GunGame.getInstance().getPrefix() + "§cDu bist schon in einem Team.");
+                        player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERISINTEAM.getAsString());
                     }
                     break;
                 case "deny":
@@ -134,10 +135,10 @@ public class Command_Team implements CommandExecutor {
                             owner.sendMessage(GunGame.getInstance().getPrefix() + "§a" + player.getDisplayName() + "§7 hat deine Anfrage §cabgelehnt§7.");
                             player.sendMessage(GunGame.getInstance().getPrefix() + "§7Du hast die Anfrage von §a" + owner.getDisplayName() + " §cabgelehnt§7.");
                         } else {
-                            player.sendMessage(GunGame.getInstance().getPrefix() + "§cDu wurdest zu keinem Team eingeladen.");
+                            player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERHASNOTEAMINVITE.getAsString());
                         }
                     }else{
-                        player.sendMessage(GunGame.getInstance().getPrefix() + "§cDu bist schon in einem Team.");
+                        player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERISINTEAM.getAsString());
                     }
                     break;
                 case "info":
