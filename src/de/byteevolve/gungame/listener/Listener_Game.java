@@ -127,8 +127,9 @@ public class Listener_Game implements Listener {
         playerStats.add(PlayerStatsType.DEATHS, 1);
         playerStats.remove(PlayerStatsType.POINTS, 5);
         new PlayerHandler(player).sendScoreBoard();
-        event.setRespawnLocation(GunGame.getInstance().getLocationHandler().getLocByName(GunGame.getInstance().getGameHandler().getCurrent().getSpawn()).getAsLocation());
-
+        if(GunGame.getInstance().getGameHandler().getCurrent() != null) {
+            event.setRespawnLocation(GunGame.getInstance().getLocationHandler().getLocByName(GunGame.getInstance().getGameHandler().getCurrent().getSpawn()).getAsLocation());
+        }
     }
 
 }

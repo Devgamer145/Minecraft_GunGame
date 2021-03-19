@@ -45,7 +45,11 @@ public class PlayerHandler {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
 
         PlayerStats playerStats = new PlayerStats(this.player.getUniqueId().toString());
-        String map = GunGame.getInstance().getGameHandler().getCurrent().getDisplayname().replaceAll("&", "§");
+
+        String map;
+        if(GunGame.getInstance().getGameHandler().getCurrent() != null) {
+            map = GunGame.getInstance().getGameHandler().getCurrent().getDisplayname().replaceAll("&", "§");
+        } else map = "-";
 
         ScoreboardScore a = new ScoreboardScore(sb, obj, "§8§M§l------------" + "§2");
         ScoreboardScore a2 = new ScoreboardScore(sb, obj, "§6✦ §8▎ §7Map");
