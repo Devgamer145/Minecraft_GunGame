@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum ConfigSections implements ConfigSection {
+
     MESSAGES("messages", "Alle Einstellungen zu den Chat Nachrichten."),
     SETTINGS("settings", "Alle anderen Einstellungen."),
     MYSQL("mysql", "Hier musst du deine Datenbank Einstellungen treffen");

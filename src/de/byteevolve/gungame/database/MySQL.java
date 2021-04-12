@@ -83,7 +83,7 @@ public class MySQL {
         return resultSet;
     }
 
-    private boolean isConnected() {
+    public boolean isConnected() {
         return (this.connection != null);
     }
 }

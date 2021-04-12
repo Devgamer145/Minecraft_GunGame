@@ -14,14 +14,22 @@ import de.byteevolve.gungame.game.GameHandler;
 import de.byteevolve.gungame.kit.Kit;
 import de.byteevolve.gungame.listener.*;
 import de.byteevolve.gungame.location.LocationHandler;
+import de.byteevolve.gungame.logger.LogTypes;
+import de.byteevolve.gungame.logger.Logger;
 import de.byteevolve.gungame.team.Team;
 import de.byteevolve.gungame.team.TeamHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -43,7 +51,6 @@ public class GunGame extends JavaPlugin {
     public void onEnable() {
         instance = this;
         this.configHandler = new ConfigHandler();
-
         this.prefix = ConfigEntries.PREFIX.getAsString();
         this.noPerm = this.prefix + ConfigEntries.NOPERM.getAsString();
         this.mustAPlayer = this.prefix + ConfigEntries.MUSTAPLAYER.getAsString();
@@ -88,7 +95,9 @@ public class GunGame extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.mySQL.close();
+        if(this.mySQL != null) {
+            if (this.mySQL.isConnected()) this.mySQL.close();
+        }
     }
 
     public TeamHandler getTeamHandler() {
