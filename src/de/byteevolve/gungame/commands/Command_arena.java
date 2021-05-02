@@ -66,7 +66,14 @@ public class Command_arena implements CommandExecutor {
             if(GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().containsKey(player))
                 new PlayerHandler(player).openArenaEditMainInv(GunGame.getInstance().getArenaHandler().getArenaPlayerCreate().get(player));
             else player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERNOTCREATESARENA.getAsString());
-        }else player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.ARENAHELP.getAsString());
+        }else if(args[0].equalsIgnoreCase("list")){
+                if(GunGame.getInstance().getArenaHandler().getArenas().isEmpty())
+                    player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.NOARENAEXISTS.getAsString());
+
+            for(Arena arena : GunGame.getInstance().getArenaHandler().getArenas()){
+                player.sendMessage(ConfigEntries.PREFIX.getAsString() + "§a" + arena.getDisplayname().replaceAll("&", "§") + " §7» " + arena.getArenaTeamState().getPrefix());
+            }
+            }else player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.ARENAHELP.getAsString());
     }else player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.ARENAHELP.getAsString());
 
 
