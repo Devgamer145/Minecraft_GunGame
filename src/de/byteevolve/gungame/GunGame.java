@@ -32,6 +32,7 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class GunGame extends JavaPlugin {
@@ -66,6 +67,19 @@ public class GunGame extends JavaPlugin {
 
         if(this.arenaHandler.getArenas().size() > 1){
             this.gameHandler.startGameTimer();
+        }
+
+        try {
+            String siteVersion = new Scanner(new URL("https://byte-evolve.de/royalbyte/gungameversion.html").openStream(), "UTF-8").useDelimiter("\\A").next();
+            if(!getDescription().getVersion().equalsIgnoreCase(siteVersion)){
+                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
+                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§cVersion: §b" + getDescription().getVersion() + " §8[§4Veraltet§8]");
+                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Lade dir die neuste Version für die weiter Nutzung herunter...");
+                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§a§lhttps://byte-evolve.de/kategorien/gungame/");
+                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
