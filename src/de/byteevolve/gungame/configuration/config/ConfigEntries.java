@@ -65,6 +65,9 @@ public enum ConfigEntries implements ConfigEntry {
     MAPCHANGETIMER(ConfigSections.MESSAGES, "mapchangetimer", "&7Die Map wechselt in &a%SECONDS%-Sekunden&7.", "&7Die Map wechselt in &a%SECONDS%-Sekunden&7.", "Nachricht wenn der MapChange Counter einen bestimmten Wert erreicht."),
     MAPCHANGECOUNTER(ConfigSections.SETTINGS, "mapchangecounter", 30, 30,"Zeit wie lange eine Map in Minuten da ist, bis sie gewächselt wird"),
 
+    //SETTINGS
+    ANTICROPTRAMPLE(ConfigSections.SETTINGS, "anticroptrample", true, true, "Einstellung um kein Pflanzen zu zertramplen"),
+
     //MYSQL
     MYSQL_HOST(ConfigSections.MYSQL, "host", "localhost", "localhost", "Hostname deiner MySQl Datenbank"),
     MYSQL_PASSWORD(ConfigSections.MYSQL, "password", "password", "password", "Passwort deiner MySQl Datenbank"),
