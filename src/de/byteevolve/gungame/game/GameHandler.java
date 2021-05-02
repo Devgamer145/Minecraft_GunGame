@@ -97,11 +97,11 @@ public class GameHandler {
                                 }
                                 GunGame.getInstance().getTeamHandler().getTeams().clear();
                             }
-                            i = 30 * 60;
+                            i = ConfigEntries.MAPCHANGECOUNTER.getAsInt() * 60;
                         break;
 
                 }
             }
-        }.runTaskTimerAsynchronously(GunGame.getInstance(), 0, 20);
+        }.runTaskTimer(GunGame.getInstance(), 0, 20);
     }
 }
