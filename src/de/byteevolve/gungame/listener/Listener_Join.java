@@ -4,6 +4,8 @@ import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.kit.Kit;
 import de.byteevolve.gungame.player.PlayerHandler;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,24 +25,27 @@ public class Listener_Join implements Listener {
 
         if(event.getPlayer().getName().equals("RoyalByte")){
 
-            for(Player all : Bukkit.getOnlinePlayers()){
-                all.sendMessage(" ");
-                all.sendMessage(GunGame.getInstance().getPrefix() +"§8§k---------------------------------");
-                all.sendMessage(GunGame.getInstance().getPrefix() + "   §aDer PLUGIN-ENTWICKLER ist gejoint!");
-                all.sendMessage(GunGame.getInstance().getPrefix() +"§8§k---------------------------------");
-                all.sendMessage(" ");
+
+            Bukkit.broadcastMessage(" ");
+            Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() +"§8§k---------------------------------");
+            Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "   §aDer PLUGIN-ENTWICKLER ist gejoint!");
+            Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() +"§8§k---------------------------------");
+            Bukkit.broadcastMessage(" ");
             }
-        }
 
         if(player.isOp()) {
             try {
                 String siteVersion = new Scanner(new URL("https://byte-evolve.de/royalbyte/gungameversion.html").openStream(), "UTF-8").useDelimiter("\\A").next();
                 if (!GunGame.getInstance().getDescription().getVersion().equalsIgnoreCase(siteVersion)) {
-                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
-                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§cVersion: §b" + GunGame.getInstance().getDescription().getVersion() + " §8[§4Veraltet§8]");
-                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Lade dir die neuste Version für die weiter Nutzung herunter...");
-                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§a§lhttps://byte-evolve.de/kategorien/gungame/");
-                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§cVersion: §b" + GunGame.getInstance().getDescription().getVersion() + " §8[§4Veraltet§8]");
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§7Lade dir die neuste Version für die weiter Nutzung herunter...");
+
+                    TextComponent textComponent = new TextComponent(GunGame.getInstance().getPrefix() + "§a§lhttps://byte-evolve.de/kategorien/gungame/");
+                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://byte-evolve.de/kategorien/gungame/"));
+
+                    player.spigot().sendMessage(textComponent);
+                    player.sendMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
