@@ -1,6 +1,8 @@
 package de.byteevolve.gungame.arena;
 
 
+import de.byteevolve.gungame.configuration.config.ConfigEntries;
+
 /**
  * Available ArenaTeamStates
  * {@link #ALLOWED}
@@ -11,12 +13,12 @@ public enum ArenaTeamState {
     /**
      * ALLOWED
      */
-    ALLOWED("§aTeams erlaubt"),
+    ALLOWED(ConfigEntries.TEAMSTATEALLOWED.getAsString()),
 
     /**
      * DISALLOWED
      */
-    DISALLOWED("§cTeams verboten");
+    DISALLOWED(ConfigEntries.TEAMSTATEDISALLOWED.getAsString());
 
     private String prefix;
 
