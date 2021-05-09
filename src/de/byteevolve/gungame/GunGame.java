@@ -3,6 +3,7 @@ import com.sun.xml.internal.bind.v2.model.annotation.AbstractInlineAnnotationRea
 import de.byteevolve.gungame.arena.Arena;
 import de.byteevolve.gungame.arena.ArenaHandler;
 import de.byteevolve.gungame.arena.ArenaTeamState;
+import de.byteevolve.gungame.bstats.Metrics;
 import de.byteevolve.gungame.commands.Command_Stats;
 import de.byteevolve.gungame.commands.Command_Team;
 import de.byteevolve.gungame.commands.Command_arena;
@@ -51,6 +52,10 @@ public class GunGame extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        int pluginId = 11293;
+        Metrics metrics = new Metrics(this, pluginId);
+
         this.configHandler = new ConfigHandler();
         this.prefix = ConfigEntries.PREFIX.getAsString();
         this.noPerm = this.prefix + ConfigEntries.NOPERM.getAsString();
