@@ -52,56 +52,77 @@ public class GameHandler {
     }
 
     public void startGameTimer() {
-        new BukkitRunnable() {
-            int i = ConfigEntries.MAPCHANGECOUNTER.getAsInt() * 60;
-            int arena = 0;
-            @Override
-            public void run() {
-                for(Player player : Bukkit.getOnlinePlayers()){
-                    new PlayerHandler(player).sendActionBar("§7Mapchange in§8: §a" + i + "-Sekunden §8§l︳ §7" + getCurrent().getArenaTeamState().getPrefix());
-                }
-                i--;
-                switch (i){
-                    case 300: case 120: case 60: case 30: case 15: case 10:
-                        Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGETIMER.getAsString().replaceAll("%SECONDS%", String.valueOf(i)));
-                        break;
-                    case 5: case 4: case 3: case 2:
-                        Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGETIMER.getAsString().replaceAll("%SECONDS%", String.valueOf(i)));
-                        for(Player player : Bukkit.getOnlinePlayers()){
-                            player.playSound(player.getLocation(), Sound.NOTE_BASS, 10, 10);
+            new BukkitRunnable() {
+                int i = ConfigEntries.MAPCHANGECOUNTER.getAsInt() * 60;
+                int arena = 0;
+
+                @Override
+                public void run() {
+
+                    if (GunGame.getInstance().getArenaHandler().getArenas().size() > 1) {
+                        String actionbar = ConfigEntries.GAMEACTIONBARMAPCHANGE.getAsString();
+                        actionbar = actionbar.replaceAll("%SECONDS%", String.valueOf(i));
+                        actionbar = actionbar.replaceAll("%TEAMSTATE%", getCurrent().getArenaTeamState().getPrefix());
+                        for (Player player : Bukkit.getOnlinePlayers()) {
+                            new PlayerHandler(player).sendActionBar(actionbar);
                         }
-                        break;
-                    case 1:
-                            if(GunGame.getInstance().getArenaHandler().getArenas().size() > 1){
-                                int newArena = arena +1;
-                                if(GunGame.getInstance().getArenaHandler().getArenas().size()<= newArena){
-                                    newArena = 0;
+                        i--;
+                        switch (i) {
+                            case 300:
+                            case 120:
+                            case 60:
+                            case 30:
+                            case 15:
+                            case 10:
+                                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGETIMER.getAsString().replaceAll("%SECONDS%", String.valueOf(i)));
+                                break;
+                            case 5:
+                            case 4:
+                            case 3:
+                            case 2:
+                                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGETIMER.getAsString().replaceAll("%SECONDS%", String.valueOf(i)));
+                                for (Player player : Bukkit.getOnlinePlayers()) {
+                                    player.playSound(player.getLocation(), Sound.NOTE_BASS, 10, 10);
                                 }
-
-                                setCurrent(GunGame.getInstance().getArenaHandler().getArenas().get(newArena));
-                                arena = newArena;
-
-                                for(Player player : Bukkit.getOnlinePlayers()){
-                                    if(GunGame.getInstance().getTeamHandler().inTeam(player.getUniqueId().toString())!= null) {
-                                        if (getCurrent().getArenaTeamState().equals(ArenaTeamState.DISALLOWED)) {
-                                            player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMDELETE.getAsString());
-                                        }
+                                break;
+                            case 1:
+                                if (GunGame.getInstance().getArenaHandler().getArenas().size() > 1) {
+                                    int newArena = arena + 1;
+                                    if (GunGame.getInstance().getArenaHandler().getArenas().size() <= newArena) {
+                                        newArena = 0;
                                     }
-                                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 10, 10);
-                                    player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGE.getAsString().replaceAll("%MAP%", getCurrent().getDisplayname().replaceAll("&", "§")));
-                                    new PlayerHandler(player).sendScoreBoard();
-                                    GunGame.getInstance().getGameHandler().getPlayerkits().put(player, Kit.LEVEL_0);
-                                    GunGame.getInstance().getGameHandler().getPlayerkits().get(player).getKitInventory().load(player);
-                                    player.teleport(GunGame.getInstance().getLocationHandler().getLocByName(getCurrent().getSpawn()).getAsLocation());
-                                    player.setLevel(0);
-                                }
-                                GunGame.getInstance().getTeamHandler().getTeams().clear();
-                            }
-                            i = ConfigEntries.MAPCHANGECOUNTER.getAsInt() * 60;
-                        break;
 
+                                    setCurrent(GunGame.getInstance().getArenaHandler().getArenas().get(newArena));
+                                    arena = newArena;
+
+                                    for (Player player : Bukkit.getOnlinePlayers()) {
+                                        if (GunGame.getInstance().getTeamHandler().inTeam(player.getUniqueId().toString()) != null) {
+                                            if (getCurrent().getArenaTeamState().equals(ArenaTeamState.DISALLOWED)) {
+                                                player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMDELETE.getAsString());
+                                            }
+                                        }
+                                        player.playSound(player.getLocation(), Sound.LEVEL_UP, 10, 10);
+                                        player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGE.getAsString().replaceAll("%MAP%", getCurrent().getDisplayname().replaceAll("&", "§")));
+                                        new PlayerHandler(player).sendScoreBoard();
+                                        GunGame.getInstance().getGameHandler().getPlayerkits().put(player, Kit.LEVEL_0);
+                                        GunGame.getInstance().getGameHandler().getPlayerkits().get(player).getKitInventory().load(player);
+                                        player.teleport(GunGame.getInstance().getLocationHandler().getLocByName(getCurrent().getSpawn()).getAsLocation());
+                                        player.setLevel(0);
+                                    }
+                                    GunGame.getInstance().getTeamHandler().getTeams().clear();
+                                }
+                                i = ConfigEntries.MAPCHANGECOUNTER.getAsInt() * 60;
+                                break;
+
+                        }
+                    }else{
+                        String actionbar = ConfigEntries.GAMEACTIONBAR.getAsString();
+                        actionbar = actionbar.replaceAll("%TEAMSTATE%", getCurrent().getArenaTeamState().getPrefix());
+                        for (Player player : Bukkit.getOnlinePlayers()) {
+                            new PlayerHandler(player).sendActionBar(actionbar);
+                        }
+                    }
                 }
-            }
-        }.runTaskTimer(GunGame.getInstance(), 0, 20);
+            }.runTaskTimer(GunGame.getInstance(), 0, 20);
     }
 }
