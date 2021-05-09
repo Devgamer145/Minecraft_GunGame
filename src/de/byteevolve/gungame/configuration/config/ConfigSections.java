@@ -10,6 +10,8 @@ public enum ConfigSections implements ConfigSection {
 
     MESSAGES("messages", "Alle Einstellungen zu den Chat Nachrichten."),
     SETTINGS("settings", "Alle anderen Einstellungen."),
+    TEAMSTATES("teamstates", "Alle TeamStates Einstellungen"),
+    SCOREBOARD("scoreboard", "Alle Scoreboard Einstellungen"),
     MYSQL("mysql", "Hier musst du deine Datenbank Einstellungen treffen");
 
     private String name, desc;

@@ -55,6 +55,17 @@ public enum ConfigEntries implements ConfigEntry {
     TEAMKICKHELP(ConfigSections.MESSAGES, "teamkickhelp", "&cBitte nutze /team kick <Player>", "&cBitte nutze /team kick <Player>", "Hilfe für den Command /team kick"),
     TEAMHELP(ConfigSections.MESSAGES, "teamhelp", "&aInformationen zum Teamsystem \n &a/team invite &7<&aSpieler&7> &7Lädt einen Spieler in das Team ein \n &a/team accept &7Nimmt eine Anfrage an \n &a/team deny &7Lehnt eine Anfrage ab \n &a/team info &7Zeigt alle Mitglieder deines Teams an \n &a/team leave &7Verlässt das Team \n &a/team kick &7<&aSpieler&7> Kickt einen Spieler aus dem Team", "&aInformationen zum Teamsystem \n &a/team invite &7<&aSpieler&7> &7Lädt einen Spieler in das Team ein \n &a/team accept &7Nimmt eine Anfrage an \n &a/team deny &7Lehnt eine Anfrage ab \n &a/team info &7Zeigt alle Mitglieder deines Teams an \n &a/team leave &7Verlässt das Team \n &a/team kick &7<&aSpieler&7> Kickt einen Spieler aus dem Team", "Hilfe NAchricht beim Command /team"),
 
+    //TEAMSTATES
+    TEAMSTATEALLOWED(ConfigSections.TEAMSTATES, "allowed", "&aTeams erlaubt", "&aTeams erlaubt", "Prefix des TeamStates Allowed"),
+    TEAMSTATEDISALLOWED(ConfigSections.TEAMSTATES, "disallowed", "&cTeams verboten", "&cTeams verboten", "Prefix des TeamStates Disallowed"),
+
+    //SCOREBOARD
+    SCOREBOARD(ConfigSections.SCOREBOARD, "scoreboard", "&8&M&l------------&2\n&6✦ &8▎ &7Map\n &8➥ &7%MAP%&a\n&8  \n&c✪ &8▎ &7Rekord\n &8➥ &7%RECORD%&c\n&d\n&c❤ &8▎ &7Kills\n &8➥ &7%KILLS%\n&1\n&c✿ &8▎ &7Rang\n &8➥ &7#%RANK%\n&8&M&l------------&3",
+            "&8&M&l------------&2\n&6✦ &8▎ &7Map\n &8➥ &7%MAP%&a\n&8  \n&c✪ &8▎ &7Rekord\n &8➥ &7%RECORD%&c\n&d\n&c❤ &8▎ &7Kills\n &8➥ &7%KILLS%\n&1\n&c✿ &8▎ &7Rang\n &8➥ &7#%RANK%\n&8&M&l------------&3",
+            "Scoreboard Einstellungen:\n %MAP% = Aktuelle Map/Arena \n %RECORD% = Highscore des Spielers \n %KILLS% = Alltime Kills eines Spielers \n %DEATHS% = Alltime Tode eines Spielers \n %RANK% = Rank eines Spielers \n %KD% = Kills/Deaths eines Spielers"),
+    SCOREBOARDNAME(ConfigSections.SCOREBOARD, "name","&aGun&2Game", "&aGun&2Game", "Displayname des Scoreboards"),
+
+
     //DEATH
     PLAYERDEAD(ConfigSections.MESSAGES, "playerdead", "&7Du bist gestorben.", "&7Du bist gestorben.", "Nachricht wenn ein Spieler gestorben ist"),
     PLAYERKILLED(ConfigSections.MESSAGES, "playerkilled", "&7Du wurdest von &c %KILLER% &7getötet.", "&7Du wurdest von &c %KILLER% &7getötet.", "Nachricht an einen Spieler, wenn er getötet wurde. \n %KILLER% = Name des Killers"),
@@ -64,6 +75,9 @@ public enum ConfigEntries implements ConfigEntry {
     MAPCHANGE(ConfigSections.MESSAGES, "mapchange", "&7Die Map wurde auf&a %MAP% &7gesetzt.", "&7Die Map wurde auf&a %MAP% &7gesetzt.", "Nachricht wenn eine Map geändert wird."),
     MAPCHANGETIMER(ConfigSections.MESSAGES, "mapchangetimer", "&7Die Map wechselt in &a%SECONDS%-Sekunden&7.", "&7Die Map wechselt in &a%SECONDS%-Sekunden&7.", "Nachricht wenn der MapChange Counter einen bestimmten Wert erreicht."),
     MAPCHANGECOUNTER(ConfigSections.SETTINGS, "mapchangecounter", 30, 30,"Zeit wie lange eine Map in Minuten da ist, bis sie gewächselt wird"),
+
+    GAMEACTIONBARMAPCHANGE(ConfigSections.MESSAGES, "gameactionbarmapchange", "&7Mapchange in&8: &a%SECONDS%-Sekunden &8&l︳ &7%TEAMSTATE%", "&7Mapchange in&8: &a%SECONDS%-Sekunden &8&l︳ &7%TEAMSTATE%", "Actionbar wenn der MapChange an ist."),
+    GAMEACTIONBAR(ConfigSections.MESSAGES, "gameactionbar", "&7%TEAMSTATE%", "&7%TEAMSTATE%", "Actionbar wenn der MapChange aus ist."),
 
     //SETTINGS
     ANTICROPTRAMPLE(ConfigSections.SETTINGS, "anticroptrample", true, true, "Einstellung um kein Pflanzen zu zertramplen"),
