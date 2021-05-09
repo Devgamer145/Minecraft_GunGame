@@ -1,7 +1,7 @@
 name: GunGame
 author: RoyalByte
 main: de.byteevolve.gungame.GunGame
-version: 1.0.5
+version: 1.0.6
 commands:
   arena:
   build:
