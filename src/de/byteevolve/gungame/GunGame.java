@@ -70,9 +70,10 @@ public class GunGame extends JavaPlugin {
         this.teamHandler = new TeamHandler();
         this.build = new ArrayList<>();
 
-        if(this.arenaHandler.getArenas().size() > 1){
+        if(!this.arenaHandler.getArenas().isEmpty()) {
             this.gameHandler.startGameTimer();
         }
+
 
         try {
             String siteVersion = new Scanner(new URL("https://byte-evolve.de/royalbyte/gungameversion.html").openStream(), "UTF-8").useDelimiter("\\A").next();
