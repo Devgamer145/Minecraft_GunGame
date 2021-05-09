@@ -4,6 +4,7 @@ import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.arena.Arena;
 import de.byteevolve.gungame.arena.ArenaState;
 import de.byteevolve.gungame.arena.ArenaTeamState;
+import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.itembuilder.ItemBuilder;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.Bukkit;
@@ -36,13 +37,10 @@ public class PlayerHandler {
 
     public void sendScoreBoard() {
         Scoreboard sb = new Scoreboard();
-        ScoreboardObjective obj = sb.registerObjective("§aGun§2Game", IScoreboardCriteria.b);
+        ScoreboardObjective obj = sb.registerObjective(ConfigEntries.SCOREBOARDNAME.getAsString(), IScoreboardCriteria.b);
         PacketPlayOutScoreboardObjective createpacket = new PacketPlayOutScoreboardObjective(obj, 0);
         PacketPlayOutScoreboardDisplayObjective display = new PacketPlayOutScoreboardDisplayObjective(1, obj);
-        obj.setDisplayName("LOBBY");
-
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        obj.setDisplayName("GUNGAME");
 
         PlayerStats playerStats = new PlayerStats(this.player.getUniqueId().toString());
 
@@ -51,65 +49,30 @@ public class PlayerHandler {
             map = GunGame.getInstance().getGameHandler().getCurrent().getDisplayname().replaceAll("&", "§");
         } else map = "-";
 
-        ScoreboardScore a = new ScoreboardScore(sb, obj, "§8§M§l------------" + "§2");
-        ScoreboardScore a2 = new ScoreboardScore(sb, obj, "§6✦ §8▎ §7Map");
-        ScoreboardScore a3 = new ScoreboardScore(sb, obj, " §8➥ §7" + map+ "§a");
-        ScoreboardScore a4 = new ScoreboardScore(sb, obj, "§8  ");
-        ScoreboardScore a8 = new ScoreboardScore(sb, obj, "§c✪ §8▎ §7Rekord");
-        ScoreboardScore a9 = new ScoreboardScore(sb, obj, " §8➥ §7" + playerStats.get(PlayerStatsType.HIGHSCORE) + "§c");
-        ScoreboardScore a10 = new ScoreboardScore(sb, obj, " " + "§d");
-        ScoreboardScore a11 = new ScoreboardScore(sb, obj, "§c❤ §8▎ §7Kills");
-        ScoreboardScore a12 = new ScoreboardScore(sb, obj, " §8➥ §7" + playerStats.get(PlayerStatsType.KILLS));
-        ScoreboardScore a13 = new ScoreboardScore(sb, obj, " " + "§1");
-        ScoreboardScore a14 = new ScoreboardScore(sb, obj, "§c✿ §8▎ §7Rang");
-        ScoreboardScore a15 = new ScoreboardScore(sb, obj, " §8➥ §7#" + playerStats.getRank());
-        ScoreboardScore a19 = new ScoreboardScore(sb, obj, "§8§M§l------------" + "§3");
-
-        a.setScore(17);
-        a2.setScore(16);
-        a3.setScore(15);
-        a4.setScore(14);
-        a8.setScore(10);
-        a9.setScore(9);
-        a10.setScore(8);
-        a11.setScore(7);
-        a12.setScore(6);
-        a13.setScore(5);
-        a14.setScore(4);
-        a15.setScore(3);
-        a19.setScore(2);
-
         PacketPlayOutScoreboardObjective removePacket = new PacketPlayOutScoreboardObjective(obj, 1);
-        PacketPlayOutScoreboardScore pa1 = new PacketPlayOutScoreboardScore(a);
-        PacketPlayOutScoreboardScore pa2 = new PacketPlayOutScoreboardScore(a2);
-        PacketPlayOutScoreboardScore pa3 = new PacketPlayOutScoreboardScore(a3);
-        PacketPlayOutScoreboardScore pa4 = new PacketPlayOutScoreboardScore(a4);
-        PacketPlayOutScoreboardScore pa8 = new PacketPlayOutScoreboardScore(a8);
-        PacketPlayOutScoreboardScore pa9 = new PacketPlayOutScoreboardScore(a9);
-        PacketPlayOutScoreboardScore pa10 = new PacketPlayOutScoreboardScore(a10);
-        PacketPlayOutScoreboardScore pa11 = new PacketPlayOutScoreboardScore(a11);
-        PacketPlayOutScoreboardScore pa12 = new PacketPlayOutScoreboardScore(a12);
-        PacketPlayOutScoreboardScore pa19 = new PacketPlayOutScoreboardScore(a19);
-        PacketPlayOutScoreboardScore pa13 = new PacketPlayOutScoreboardScore(a13);
-        PacketPlayOutScoreboardScore pa14 = new PacketPlayOutScoreboardScore(a14);
-        PacketPlayOutScoreboardScore pa15 = new PacketPlayOutScoreboardScore(a15);
-
         sendPacket(removePacket);
         sendPacket(createpacket);
         sendPacket(display);
-        sendPacket(pa1);
-        sendPacket(pa2);
-        sendPacket(pa3);
-        sendPacket(pa4);
-        sendPacket(pa8);
-        sendPacket(pa9);
-        sendPacket(pa10);
-        sendPacket(pa11);
-        sendPacket(pa12);
-        sendPacket(pa19);
-        sendPacket(pa13);
-        sendPacket(pa14);
-        sendPacket(pa15);
+
+        int i = 16;
+        for(String line : ConfigEntries.SCOREBOARD.getAsString().split("\n")){
+            line = line.replaceAll("%MAP%", map);
+            line = line.replaceAll("%RECORD%", String.valueOf(playerStats.get(PlayerStatsType.HIGHSCORE)));
+            line = line.replaceAll("%KILLS%", String.valueOf(playerStats.get(PlayerStatsType.KILLS)));
+            line = line.replaceAll("%DEATHS%", String.valueOf(playerStats.get(PlayerStatsType.DEATHS)));
+            line = line.replaceAll("%RANK%", String.valueOf(playerStats.getRank()));
+            line = line.replaceAll("%KD%", String.valueOf(playerStats.getKD()));
+
+
+            ScoreboardScore score = new ScoreboardScore(sb, obj, line);
+            score.setScore(i);
+
+            PacketPlayOutScoreboardScore packet= new PacketPlayOutScoreboardScore(score);
+            sendPacket(packet);
+
+            i--;
+        }
+
 
     }
 
