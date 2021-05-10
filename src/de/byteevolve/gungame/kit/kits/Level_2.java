@@ -2,9 +2,7 @@ package de.byteevolve.gungame.kit.kits;
 
 import de.byteevolve.gungame.itembuilder.ItemBuilder;
 import de.byteevolve.gungame.itembuilder.LeatherBuilder;
-import de.byteevolve.gungame.itembuilder.SkullBuilder;
 import de.byteevolve.gungame.kit.KitInventory;
-import net.minecraft.server.v1_8_R3.ItemBoat;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
