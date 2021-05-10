@@ -3,7 +3,6 @@ package de.byteevolve.gungame.arena;
 import de.byteevolve.gungame.GunGame;
 import org.bukkit.entity.Player;
 
-import java.awt.geom.Area;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
