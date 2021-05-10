@@ -46,6 +46,8 @@ public class Listener_Join implements Listener {
 
                     player.spigot().sendMessage(textComponent);
                     player.sendMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
+                    Bukkit.getPluginManager().disablePlugin(GunGame.getInstance());
+                    return;
                 }
             } catch (IOException e) {
                 e.printStackTrace();

@@ -83,6 +83,8 @@ public class GunGame extends JavaPlugin {
                 Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Lade dir die neuste Version für die weiter Nutzung herunter...");
                 Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§a§lhttps://byte-evolve.de/kategorien/gungame/");
                 Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
+                Bukkit.getPluginManager().disablePlugin(GunGame.getInstance());
+                return;
             }
         } catch (IOException e) {
             e.printStackTrace();
