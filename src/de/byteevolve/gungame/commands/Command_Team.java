@@ -4,14 +4,10 @@ import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.arena.ArenaTeamState;
 import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.team.Team;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -52,13 +48,6 @@ public class Command_Team implements CommandExecutor {
                                         }
                                         team.getInvites().add(toInvite.getUniqueId().toString());
                                         toInvite.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TARGETTEAMINVITE.getAsString().replaceAll("%PLAYER%", player.getDisplayName()));
-                                        IChatBaseComponent iChatBaseComponent = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + GunGame.getInstance().getPrefix() + "\",\"extra\":" +
-                                                "[{\"text\":\"§aAnnehmen\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Klicke zum §aannehmen\"},\"clickEvent\":{\"action\":\"" +
-                                                "run_command\",\"value\":\"/team accept\"}}, {\"text\":\" §7| \"}," +
-                                                " {\"text\":\"§cAblehnen\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Klicke zum §cablehnen\"},\"clickEvent\":{\"action\":\"" +
-                                                "run_command\",\"value\":\"/team deny\"}}]}");
-                                        PacketPlayOutChat packetPlayOutChat = new PacketPlayOutChat(iChatBaseComponent);
-                                        ((CraftPlayer) toInvite).getHandle().playerConnection.sendPacket(packetPlayOutChat);
                                         player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERTEAMINVITE.getAsString().replaceAll("%TARGET%", toInvite.getDisplayName()));
                                     }else {
                                         player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERINTEAM.getAsString());
@@ -83,13 +72,6 @@ public class Command_Team implements CommandExecutor {
                                     }
                                     team.getInvites().add(toInvite.getUniqueId().toString());
                                     toInvite.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TARGETTEAMINVITE.getAsString().replaceAll("%PLAYER%", player.getDisplayName()));
-                                    IChatBaseComponent iChatBaseComponent = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + GunGame.getInstance().getPrefix() + "\",\"extra\":" +
-                                            "[{\"text\":\"§aAnnehmen\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Klicke zum §aannehmen\"},\"clickEvent\":{\"action\":\"" +
-                                            "run_command\",\"value\":\"/team accept\"}}, {\"text\":\" §7| \"}," +
-                                            " {\"text\":\"§cAblehnen\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Klicke zum §cablehnen\"},\"clickEvent\":{\"action\":\"" +
-                                            "run_command\",\"value\":\"/team deny\"}}]}");
-                                    PacketPlayOutChat packetPlayOutChat = new PacketPlayOutChat(iChatBaseComponent);
-                                    ((CraftPlayer) toInvite).getHandle().playerConnection.sendPacket(packetPlayOutChat);
                                     player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERTEAMINVITE.getAsString().replaceAll("%TARGET%", toInvite.getDisplayName()));
                                 }else {
                                     player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERINTEAM.getAsString());
