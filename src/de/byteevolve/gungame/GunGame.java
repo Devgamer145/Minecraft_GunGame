@@ -1,8 +1,6 @@
 package de.byteevolve.gungame;
-import com.sun.xml.internal.bind.v2.model.annotation.AbstractInlineAnnotationReaderImpl;
-import de.byteevolve.gungame.arena.Arena;
+
 import de.byteevolve.gungame.arena.ArenaHandler;
-import de.byteevolve.gungame.arena.ArenaTeamState;
 import de.byteevolve.gungame.bstats.Metrics;
 import de.byteevolve.gungame.commands.Command_Stats;
 import de.byteevolve.gungame.commands.Command_Team;
@@ -15,21 +13,12 @@ import de.byteevolve.gungame.game.GameHandler;
 import de.byteevolve.gungame.kit.Kit;
 import de.byteevolve.gungame.listener.*;
 import de.byteevolve.gungame.location.LocationHandler;
-import de.byteevolve.gungame.logger.LogTypes;
-import de.byteevolve.gungame.logger.Logger;
-import de.byteevolve.gungame.team.Team;
 import de.byteevolve.gungame.team.TeamHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +41,7 @@ public class GunGame extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
-        int pluginId = 11293;
-        Metrics metrics = new Metrics(this, pluginId);
+        new Metrics(this, 11293);
 
         this.configHandler = new ConfigHandler();
         this.prefix = ConfigEntries.PREFIX.getAsString();
