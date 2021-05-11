@@ -5,6 +5,7 @@ import de.byteevolve.gungame.arena.Arena;
 import de.byteevolve.gungame.arena.ArenaState;
 import de.byteevolve.gungame.arena.ArenaTeamState;
 import de.byteevolve.gungame.itembuilder.ItemBuilder;
+import de.byteevolve.gungame.player.actionbar.*;
 import de.byteevolve.gungame.player.scoreboard.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -27,8 +28,47 @@ public class PlayerHandler {
     }
 
     public void sendActionBar(String text) {
-        //PacketPlayOutChat packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + text + "\"}"), (byte)2);
-        //sendPacket(packet);
+
+        GGActionbar ggActionbar = null;
+        String version = "N/A";
+        try{
+            version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+
+            switch (version) {
+                case "v1_8_R3":
+                    ggActionbar = new v1_8_R3_Actionbar();
+                    break;
+                case "v1_9_R2":
+                    ggActionbar = new v1_9_R2_Actionbar();
+                    break;
+                case "v1_10_R1":
+                    ggActionbar = new v1_10_R1_Actionbar();
+                    break;
+                case "v1_11_R1":
+                    ggActionbar = new v1_11_R1_Actionbar();
+                    break;
+                case "v1_12_R1":
+                    ggActionbar = new v1_12_R1_Actionbar();
+                    break;
+                case "v1_13_R2":
+                    ggActionbar = new v1_13_R2_Actionbar();
+                    break;
+                case "v1_14_R1":
+                    ggActionbar = new v1_14_R1_Actionbar();
+                    break;
+                case "v1_15_R1":
+                    ggActionbar = new v1_15_R1_Actionbar();
+                    break;
+                case "v1_16_R3":
+                    ggActionbar = new v1_16_R3_Actionbar();
+                    break;
+            }
+
+            ggActionbar.send(this.player, text);
+
+        }catch (ArrayIndexOutOfBoundsException ex){
+            ex.printStackTrace();
+        }
     }
 
     public void sendScoreBoard() {
