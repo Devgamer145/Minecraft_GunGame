@@ -9,24 +9,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Listener_ArenaEdit implements Listener {
 
+
     @EventHandler
     public void onClick(InventoryClickEvent event){
-        Inventory inventory = event.getClickedInventory();
         Player player = (Player) event.getWhoClicked();
-        if(inventory.getName().startsWith("§8Arena: §a")){
             event.setCancelled(true);
-            String name = inventory.getName().replaceAll("§8Arena: §a", "");
             GunGame gunGame = GunGame.getInstance();
             ArenaHandler arenaHandler = gunGame.getArenaHandler();
             Arena arena = null;
-            if(arenaHandler.existArenaByName(name)){
-                arena = arenaHandler.getArenaByName(name);
+            if(arenaHandler.getArenaEditList().containsKey(player)){
+                arena = arenaHandler.getArenaEditList().get(player);
             } else if (arenaHandler.getArenaPlayerCreate().containsKey(player)) {
                 arena = arenaHandler.getArenaPlayerCreate().get(player);
             }else{
@@ -46,6 +43,9 @@ public class Listener_ArenaEdit implements Listener {
                     arena.update();
                     player.sendMessage(gunGame.getPrefix() + "§7Du hast die Arena: §a" + arena.getDisplayname() + "§7 geupdatet.");
                     player.closeInventory();
+                    if(arenaHandler.getArenaEditList().containsKey(player)){
+                        arenaHandler.getArenaEditList().remove(player);
+                    }
                 }else {
                     player.sendMessage(gunGame.getPrefix() + "§7Du hast die Spawn-Location gesetzt.");
                     player.closeInventory();
@@ -60,6 +60,9 @@ public class Listener_ArenaEdit implements Listener {
                     arena.update();
                     player.sendMessage(gunGame.getPrefix() + "§7Du hast die Arena: §a" + arena.getDisplayname().replaceAll("&", "§") + "§7 geupdatet.");
                     player.closeInventory();
+                    if(arenaHandler.getArenaEditList().containsKey(player)){
+                        arenaHandler.getArenaEditList().remove(player);
+                    }
                 }else {
                     player.sendMessage(gunGame.getPrefix() + "§7Du hast die ObereSpawnProt-Location gesetzt.");
                     player.closeInventory();
@@ -74,6 +77,9 @@ public class Listener_ArenaEdit implements Listener {
                     arena.update();
                     player.sendMessage(gunGame.getPrefix() + "§7Du hast die Arena: §a" + arena.getDisplayname().replaceAll("&", "§") + "§7 geupdatet.");
                     player.closeInventory();
+                    if(arenaHandler.getArenaEditList().containsKey(player)){
+                        arenaHandler.getArenaEditList().remove(player);
+                    }
                 }else {
                     player.sendMessage(gunGame.getPrefix() + "§7Du hast die UntereSpawnProt-Location gesetzt.");
                     player.closeInventory();
@@ -90,6 +96,9 @@ public class Listener_ArenaEdit implements Listener {
                     arena.update();
                     player.sendMessage(gunGame.getPrefix() + "§7Du hast die Arena: §a" + arena.getDisplayname().replaceAll("&", "§") + "§7 geupdatet.");
                     player.closeInventory();
+                    if(arenaHandler.getArenaEditList().containsKey(player)){
+                        arenaHandler.getArenaEditList().remove(player);
+                    }
                 }else {
                     player.sendMessage(gunGame.getPrefix() + "§7Du hast den TeamState geändert.");
                     player.closeInventory();
@@ -104,6 +113,9 @@ public class Listener_ArenaEdit implements Listener {
                         }
                         player.sendMessage(gunGame.getPrefix() + "§7Die Arena:§a" + arena.getDisplayname().replaceAll("&", "§") + " §7wurde beendet.");
                         player.closeInventory();
+                        if(arenaHandler.getArenaEditList().containsKey(player)){
+                            arenaHandler.getArenaEditList().remove(player);
+                        }
                     }else{
                         player.sendMessage(gunGame.getPrefix() + "§cDie Arena ist noch nicht fertig.");
                         player.closeInventory();
@@ -111,7 +123,7 @@ public class Listener_ArenaEdit implements Listener {
                 }else{
                     player.sendMessage(gunGame.getPrefix() + "§cDie Arena ist schon beendet.");
                     player.closeInventory();
-                }
+
             }
 
         }
