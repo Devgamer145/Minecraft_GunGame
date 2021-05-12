@@ -13,9 +13,9 @@ public class Level_36 implements KitInventory {
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
         player.getInventory().setItem(0, new ItemBuilder(Material.IRON_AXE, 1).build());
-        player.getInventory().setChestplate(new ItemBuilder(Material.CHAINMAIL_CHESTPLATE,1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setName(" ").build());
-        player.getInventory().setLeggings(new ItemBuilder(Material.CHAINMAIL_LEGGINGS,1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setName(" ").build());
-        player.getInventory().setBoots(new ItemBuilder(Material.CHAINMAIL_BOOTS,1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setName(" ").build());
-        player.getInventory().setHelmet(new ItemBuilder(Material.CHAINMAIL_HELMET,1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setName(" ").build());
+        player.getInventory().setChestplate(new ItemBuilder(Material.CHAINMAIL_CHESTPLATE,1).setUnbreakable(true).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setName(" ").build());
+        player.getInventory().setLeggings(new ItemBuilder(Material.CHAINMAIL_LEGGINGS,1).setUnbreakable(true).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setName(" ").build());
+        player.getInventory().setBoots(new ItemBuilder(Material.CHAINMAIL_BOOTS,1).setUnbreakable(true).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setName(" ").build());
+        player.getInventory().setHelmet(new ItemBuilder(Material.CHAINMAIL_HELMET,1).setUnbreakable(true).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setName(" ").build());
     }
 }

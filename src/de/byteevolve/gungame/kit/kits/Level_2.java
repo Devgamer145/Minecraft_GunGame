@@ -12,7 +12,7 @@ public class Level_2 implements KitInventory {
     public void load(Player player) {
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.getInventory().setItem(0, new ItemBuilder(Material.WOOD_SWORD, 1).build());
-        player.getInventory().setChestplate(new LeatherBuilder(Material.LEATHER_CHESTPLATE," ").setCount(1).setColor(Color.TEAL).build());
+        player.getInventory().setItem(0, new ItemBuilder(Material.WOOD_SWORD, 1).setUnbreakable(true).build());
+        player.getInventory().setChestplate(new LeatherBuilder(Material.LEATHER_CHESTPLATE," ").setUnbreakable(true).setCount(1).setColor(Color.TEAL).build());
     }
 }

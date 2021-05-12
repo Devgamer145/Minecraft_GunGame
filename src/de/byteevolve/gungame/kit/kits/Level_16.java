@@ -14,10 +14,10 @@ public class Level_16 implements KitInventory {
     public void load(Player player) {
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.getInventory().setItem(0, new ItemBuilder(Material.GOLD_SWORD, 1).build());
-        player.getInventory().setChestplate(new ItemBuilder(Material.GOLD_CHESTPLATE,1).setName(" ").build());
-        player.getInventory().setLeggings(new LeatherBuilder(Material.LEATHER_LEGGINGS," ").setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
-        player.getInventory().setBoots(new ItemBuilder(Material.GOLD_BOOTS,1).setName(" ").build());
-        player.getInventory().setHelmet(new ItemBuilder(Material.GOLD_HELMET,1).setName(" ").build());
+        player.getInventory().setItem(0, new ItemBuilder(Material.GOLD_SWORD, 1).setUnbreakable(true).build());
+        player.getInventory().setChestplate(new ItemBuilder(Material.GOLD_CHESTPLATE,1).setName(" ").setUnbreakable(true).build());
+        player.getInventory().setLeggings(new LeatherBuilder(Material.LEATHER_LEGGINGS," ").setUnbreakable(true).setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
+        player.getInventory().setBoots(new ItemBuilder(Material.GOLD_BOOTS,1).setName(" ").setUnbreakable(true).build());
+        player.getInventory().setHelmet(new ItemBuilder(Material.GOLD_HELMET,1).setName(" ").setUnbreakable(true).build());
     }
 }

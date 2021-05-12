@@ -11,6 +11,6 @@ public class Level_0 implements KitInventory {
     public void load(Player player) {
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.getInventory().setItem(0, new ItemBuilder(Material.WOOD_AXE, 1).build());
+        player.getInventory().setItem(0, new ItemBuilder(Material.WOOD_AXE, 1).setUnbreakable(true).build());
     }
 }

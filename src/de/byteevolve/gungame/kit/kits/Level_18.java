@@ -12,10 +12,10 @@ public class Level_18 implements KitInventory {
     public void load(Player player) {
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.getInventory().setItem(0, new ItemBuilder(Material.GOLD_AXE, 1).addEnchant(Enchantment.DAMAGE_ALL,1).build());
-        player.getInventory().setChestplate(new ItemBuilder(Material.GOLD_CHESTPLATE,1).setName(" ").build());
-        player.getInventory().setLeggings(new ItemBuilder(Material.GOLD_LEGGINGS,1).setName(" ").build());
-        player.getInventory().setBoots(new ItemBuilder(Material.GOLD_BOOTS,1).setName(" ").build());
-        player.getInventory().setHelmet(new ItemBuilder(Material.GOLD_HELMET,1).setName(" ").build());
+        player.getInventory().setItem(0, new ItemBuilder(Material.GOLD_AXE, 1).setUnbreakable(true).addEnchant(Enchantment.DAMAGE_ALL,1).build());
+        player.getInventory().setChestplate(new ItemBuilder(Material.GOLD_CHESTPLATE,1).setName(" ").setUnbreakable(true).build());
+        player.getInventory().setLeggings(new ItemBuilder(Material.GOLD_LEGGINGS,1).setName(" ").setUnbreakable(true).build());
+        player.getInventory().setBoots(new ItemBuilder(Material.GOLD_BOOTS,1).setName(" ").setUnbreakable(true).build());
+        player.getInventory().setHelmet(new ItemBuilder(Material.GOLD_HELMET,1).setName(" ").setUnbreakable(true).build());
     }
 }

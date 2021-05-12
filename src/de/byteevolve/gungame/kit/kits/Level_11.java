@@ -14,10 +14,10 @@ public class Level_11 implements KitInventory {
     public void load(Player player) {
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.getInventory().setItem(0, new ItemBuilder(Material.WOOD_SWORD, 1).addEnchant(Enchantment.DAMAGE_ALL,1).build());
-        player.getInventory().setChestplate(new LeatherBuilder(Material.LEATHER_CHESTPLATE," ").setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
-        player.getInventory().setLeggings(new LeatherBuilder(Material.LEATHER_LEGGINGS," ").setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
-        player.getInventory().setBoots(new LeatherBuilder(Material.LEATHER_BOOTS," ").setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
-        player.getInventory().setHelmet(new LeatherBuilder(Material.LEATHER_HELMET," ").setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
+        player.getInventory().setItem(0, new ItemBuilder(Material.WOOD_SWORD, 1).setUnbreakable(true).addEnchant(Enchantment.DAMAGE_ALL,1).build());
+        player.getInventory().setChestplate(new LeatherBuilder(Material.LEATHER_CHESTPLATE," ").setUnbreakable(true).setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
+        player.getInventory().setLeggings(new LeatherBuilder(Material.LEATHER_LEGGINGS," ").setUnbreakable(true).setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
+        player.getInventory().setBoots(new LeatherBuilder(Material.LEATHER_BOOTS," ").setUnbreakable(true).setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
+        player.getInventory().setHelmet(new LeatherBuilder(Material.LEATHER_HELMET," ").setUnbreakable(true).setCount(1).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL,1).setColor(Color.TEAL).build());
     }
 }
