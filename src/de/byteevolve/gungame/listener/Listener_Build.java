@@ -33,6 +33,16 @@ public class Listener_Build implements Listener {
     }
 
     @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (!(GunGame.getInstance().getBuild().contains(player.getUniqueId())
+                && event.getClickedBlock().getType().equals(Material.CHEST))
+                && event.getClickedBlock().getType().equals(Material.ENDER_CHEST)){
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onEntityInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
             if((boolean) ConfigEntries.ANTICROPTRAMPLE.getValue()) {
