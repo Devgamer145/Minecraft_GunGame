@@ -20,7 +20,7 @@ import java.util.Map;
 public class ArenaHandler {
 
     private List<Arena> arenas;
-    private Map<Player, Arena> arenaPlayerCreate;
+    private Map<Player, Arena> arenaPlayerCreate,arenaEditList;
 
     /**
      * Konstrukter für die Klasse {@link ArenaHandler}
@@ -28,6 +28,7 @@ public class ArenaHandler {
     public ArenaHandler() {
         this.arenas = new ArrayList<>();
         this.arenaPlayerCreate = new HashMap<>();
+        this.arenaEditList = new HashMap<>();
         loadArenas();
     }
 
@@ -108,5 +109,9 @@ public class ArenaHandler {
             if(arena.getName().equalsIgnoreCase(name)) return true;
         }
         return false;
+    }
+
+    public Map<Player, Arena> getArenaEditList() {
+        return arenaEditList;
     }
 }
