@@ -53,6 +53,7 @@ public class Command_arena implements CommandExecutor {
             switch (args[0].toLowerCase()) {
                 case "edit":
                     if (GunGame.getInstance().getArenaHandler().existArenaByName(args[1])) {
+                        GunGame.getInstance().getArenaHandler().getArenaEditList().put(player, GunGame.getInstance().getArenaHandler().getArenaByName(args[1]));
                         new PlayerHandler(player).openArenaEditMainInv(GunGame.getInstance().getArenaHandler().getArenaByName(args[1]));
                     } else
                         player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.ARENANOTEXISTS.getAsString().replaceAll("%ARENANAME%", args[1]));
