@@ -51,55 +51,53 @@ public class GunGame extends JavaPlugin {
         this.mySQL = new MySQL(ConfigEntries.MYSQL_HOST.getAsString(), ConfigEntries.MYSQL_USERNAME.getAsString(),
                 ConfigEntries.MYSQL_PASSWORD.getAsString(), ConfigEntries.MYSQL_DATABASE.getAsString(),
                 ConfigEntries.MYSQL_PORT.getAsInt());
-        this.locationHandler = new LocationHandler();
-        this.arenaHandler = new ArenaHandler();
-        this.gameHandler = new GameHandler();
-        this.teamHandler = new TeamHandler();
-        this.build = new ArrayList<>();
+        if(this.mySQL.isConnected()) {
+            this.locationHandler = new LocationHandler();
+            this.arenaHandler = new ArenaHandler();
+            this.gameHandler = new GameHandler();
+            this.teamHandler = new TeamHandler();
+            this.build = new ArrayList<>();
 
-        if(!this.arenaHandler.getArenas().isEmpty()) {
-            this.gameHandler.startGameTimer();
-        }
-
-
-        try {
-            String siteVersion = new Scanner(new URL("https://byte-evolve.de/royalbyte/gungameversion.html").openStream(), "UTF-8").useDelimiter("\\A").next();
-            if(!getDescription().getVersion().equalsIgnoreCase(siteVersion)){
-                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
-                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§cVersion: §b" + getDescription().getVersion() + " §8[§4Veraltet§8]");
-                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Lade dir die neuste Version für die weiter Nutzung herunter...");
-                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§a§lhttps://byte-evolve.de/kategorien/gungame/");
-                Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
-                Bukkit.getPluginManager().disablePlugin(GunGame.getInstance());
-                return;
+            if (!this.arenaHandler.getArenas().isEmpty()) {
+                this.gameHandler.startGameTimer();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-
-        getCommand("arena").setExecutor(new Command_arena());
-        getCommand("build").setExecutor(new Command_build());
-        getCommand("team").setExecutor(new Command_Team());
-        getCommand("stats").setExecutor(new Command_Stats());
-
-        PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new Listener_ArenaEdit(), this);
-        pluginManager.registerEvents(new Listener_Join(), this);
-        pluginManager.registerEvents(new Listener_Build(), this);
-        pluginManager.registerEvents(new Listener_Game(), this);
-        pluginManager.registerEvents(new Listener_Quit(), this);
-
-        for(Player player : Bukkit.getOnlinePlayers()){
-            if(GunGame.getInstance().getGameHandler().getCurrent() != null){
-                player.teleport(GunGame.getInstance().getLocationHandler().getLocByName(GunGame.getInstance().getGameHandler().getCurrent().getSpawn()).getAsLocation());
-            }else{
-                player.sendMessage(getPrefix() + ConfigEntries.NOARENAEXISTS.getAsString());
+            try {
+                String siteVersion = new Scanner(new URL("https://byte-evolve.de/royalbyte/gungameversion.html").openStream(), "UTF-8").useDelimiter("\\A").next();
+                if (!getDescription().getVersion().equalsIgnoreCase(siteVersion)) {
+                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
+                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§cVersion: §b" + getDescription().getVersion() + " §8[§4Veraltet§8]");
+                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§7Lade dir die neuste Version für die weiter Nutzung herunter...");
+                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§a§lhttps://byte-evolve.de/kategorien/gungame/");
+                    Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + "§4§k-------------------------------------------------");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+
+            getCommand("arena").setExecutor(new Command_arena());
+            getCommand("build").setExecutor(new Command_build());
+            getCommand("team").setExecutor(new Command_Team());
+            getCommand("stats").setExecutor(new Command_Stats());
+
+            PluginManager pluginManager = Bukkit.getPluginManager();
+            pluginManager.registerEvents(new Listener_ArenaEdit(), this);
+            pluginManager.registerEvents(new Listener_Join(), this);
+            pluginManager.registerEvents(new Listener_Build(), this);
+            pluginManager.registerEvents(new Listener_Game(), this);
+            pluginManager.registerEvents(new Listener_Quit(), this);
+
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (GunGame.getInstance().getGameHandler().getCurrent() != null) {
+                    player.teleport(GunGame.getInstance().getLocationHandler().getLocByName(GunGame.getInstance().getGameHandler().getCurrent().getSpawn()).getAsLocation());
+                } else {
+                    player.sendMessage(getPrefix() + ConfigEntries.NOARENAEXISTS.getAsString());
+                }
                 GunGame.getInstance().getGameHandler().getPlayerkits().put(player, Kit.LEVEL_0);
                 GunGame.getInstance().getGameHandler().getPlayerkits().get(player).getKitInventory().load(player);
+            }
         }
-
     }
 
     @Override
