@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class Listener_Build implements Listener {
@@ -33,20 +34,16 @@ public class Listener_Build implements Listener {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        if (!(GunGame.getInstance().getBuild().contains(player.getUniqueId())
-                && event.getClickedBlock().getType().equals(Material.CHEST))
-                && event.getClickedBlock().getType().equals(Material.ENDER_CHEST)){
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
     public void onEntityInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
-            if((boolean) ConfigEntries.ANTICROPTRAMPLE.getValue()) {
+            if ((boolean) ConfigEntries.ANTICROPTRAMPLE.getValue()) {
                 event.setCancelled(true);
+            }
+        }
+        if (event.getClickedBlock() != null) {
+            if (event.getClickedBlock().getType() == Material.CHEST) {
+                event.setCancelled(true);
+                event.getPlayer().closeInventory();
             }
         }
     }
