@@ -7,6 +7,7 @@ import de.byteevolve.gungame.kit.Kit;
 import de.byteevolve.gungame.player.PlayerHandler;
 import de.byteevolve.gungame.player.PlayerStats;
 import de.byteevolve.gungame.player.PlayerStatsType;
+import de.byteevolve.gungame.sound.Sounds;
 import de.byteevolve.gungame.team.Team;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -102,14 +103,12 @@ public class Listener_Game implements Listener {
             killer.setLevel(newKitKiller.getId());
             killer.setHealth(20);
             killer.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.KILLERKILLS.getAsString().replaceAll("%PLAYER%", player.getDisplayName()));
-            killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 10, 10);
+            Sounds.LEVEL_UP.play(killer, 10, 10);
             player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERKILLED.getAsString().replaceAll("%KILLER%", killer.getDisplayName()));
         }else{
             player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERDEAD.getAsString());
         }
-        player.setVelocity(new Vector(0, 0, 0));
-        player.spigot().respawn();
-    }
+        player.setVelocity(new Vector(0, 0, 0));    }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event){
