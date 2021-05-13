@@ -6,15 +6,14 @@ import de.byteevolve.gungame.arena.ArenaTeamState;
 import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.kit.Kit;
 import de.byteevolve.gungame.player.PlayerHandler;
+import de.byteevolve.gungame.sound.Sounds;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
-import java.util.ListIterator;
 import java.util.Map;
-import java.util.Random;
 
 public class GameHandler {
 
@@ -82,7 +81,7 @@ public class GameHandler {
                             case 2:
                                 Bukkit.broadcastMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGETIMER.getAsString().replaceAll("%SECONDS%", String.valueOf(i)));
                                 for (Player player : Bukkit.getOnlinePlayers()) {
-                                    player.playSound(player.getLocation(), Sound.NOTE_BASS, 10, 10);
+                                    Sounds.NOTE_BASS.play(player, 10, 10);
                                 }
                                 break;
                             case 1:
@@ -101,7 +100,7 @@ public class GameHandler {
                                                 player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.TEAMDELETE.getAsString());
                                             }
                                         }
-                                        player.playSound(player.getLocation(), Sound.LEVEL_UP, 10, 10);
+                                        Sounds.LEVEL_UP.play(player, 10, 10);
                                         player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.MAPCHANGE.getAsString().replaceAll("%MAP%", getCurrent().getDisplayname().replaceAll("&", "§")));
                                         new PlayerHandler(player).sendScoreBoard();
                                         GunGame.getInstance().getGameHandler().getPlayerkits().put(player, Kit.LEVEL_0);
