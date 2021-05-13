@@ -5,7 +5,7 @@ import de.byteevolve.gungame.configuration.ConfigEntry;
 public enum ConfigEntries implements ConfigEntry {
 
     //DEFAULT
-    PREFIX(ConfigSections.MESSAGES, "prefix", "&8[&aGun&2Game&8]", "&8[&aGun&2Game&8]", "Text vor jeder Nachricht."),
+    PREFIX(ConfigSections.MESSAGES, "prefix", "&8[&aGun&2Game&8] ", "&8[&aGun&2Game&8] ", "Text vor jeder Nachricht."),
     NOPERM(ConfigSections.MESSAGES, "noperm", "&7Du bist nicht berechtigt dieses Kommando zu verwenden.", "&7Du bist nicht berechtigt dieses Kommando zu verwenden.", "Nachricht wenn ein Spieler nicht die benötigten Rechte hat."),
     MUSTAPLAYER(ConfigSections.MESSAGES, "mustaplayer", "&7Du musst ein &aSpieler &7sein!", "&7Du musst ein &aSpieler &7sein!", "Nachricht an Entities, welche keine Spieler sind."),
     PLAYERNOTONLINE(ConfigSections.MESSAGES, "playernotonline", "&7Der Angegebene Spieler konnte nicht gefunden werden.", "&7Der Angegebene Spieler konnte nicht gefunden werden.", "Nachricht wenn ein Spieler nicht online ist."),
