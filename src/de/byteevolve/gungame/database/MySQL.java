@@ -1,7 +1,9 @@
 package de.byteevolve.gungame.database;
 
+import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.logger.LogTypes;
 import de.byteevolve.gungame.logger.Logger;
+import org.bukkit.Bukkit;
 
 import java.sql.*;
 
@@ -20,6 +22,11 @@ public class MySQL {
         this.port = port;
 
         connect();
+
+        if(this.connection == null){
+            Bukkit.getPluginManager().disablePlugin(GunGame.getInstance());
+            return;
+        }
         createTables();
     }
 
@@ -43,7 +50,6 @@ public class MySQL {
                 Logger.log(LogTypes.SUCCESS, "Erfolgreich zur MySQL-Datenbank verbunden.");
             } catch (SQLException e) {
                 Logger.log(LogTypes.ERROR, "Konnte nicht zur MySQL-Datenbank verbinden.");
-                e.printStackTrace();
             }
         }
     }
