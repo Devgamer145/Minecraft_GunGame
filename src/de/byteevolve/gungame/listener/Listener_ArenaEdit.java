@@ -19,7 +19,6 @@ public class Listener_ArenaEdit implements Listener {
     public void onClick(InventoryClickEvent event){
         try {
             Player player = (Player) event.getWhoClicked();
-            event.setCancelled(true);
             GunGame gunGame = GunGame.getInstance();
             ArenaHandler arenaHandler = gunGame.getArenaHandler();
             Arena arena = null;
@@ -29,6 +28,7 @@ public class Listener_ArenaEdit implements Listener {
                 arena = arenaHandler.getArenaPlayerCreate().get(player);
             }
             if (arena != null) {
+                event.setCancelled(true);
                 ItemStack item = event.getCurrentItem();
                 ItemMeta itemMeta = item.getItemMeta();
                 String displayName = itemMeta.getDisplayName();
