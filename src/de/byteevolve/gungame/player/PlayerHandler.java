@@ -6,16 +6,15 @@ import de.byteevolve.gungame.arena.ArenaState;
 import de.byteevolve.gungame.arena.ArenaTeamState;
 import de.byteevolve.gungame.itembuilder.ItemBuilder;
 import de.byteevolve.gungame.player.actionbar.*;
+import de.byteevolve.gungame.player.respawn.*;
 import de.byteevolve.gungame.player.scoreboard.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.scheduler.BukkitRunnable;
 
 
-public class PlayerHandler {
+public class  PlayerHandler {
 
     private final Player player;
 
@@ -27,91 +26,16 @@ public class PlayerHandler {
         return player;
     }
 
+    public void respawnPlayer() {
+        GunGame.getInstance().getRespawn().respawn(this.player);
+    }
+
     public void sendActionBar(String text) {
-
-        GGActionbar ggActionbar = null;
-        String version = "N/A";
-        try{
-            version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-
-            switch (version) {
-                case "v1_8_R3":
-                    ggActionbar = new v1_8_R3_Actionbar();
-                    break;
-                case "v1_9_R2":
-                    ggActionbar = new v1_9_R2_Actionbar();
-                    break;
-                case "v1_10_R1":
-                    ggActionbar = new v1_10_R1_Actionbar();
-                    break;
-                case "v1_11_R1":
-                    ggActionbar = new v1_11_R1_Actionbar();
-                    break;
-                case "v1_12_R1":
-                    ggActionbar = new v1_12_R1_Actionbar();
-                    break;
-                case "v1_13_R2":
-                    ggActionbar = new v1_13_R2_Actionbar();
-                    break;
-                case "v1_14_R1":
-                    ggActionbar = new v1_14_R1_Actionbar();
-                    break;
-                case "v1_15_R1":
-                    ggActionbar = new v1_15_R1_Actionbar();
-                    break;
-                case "v1_16_R3":
-                    ggActionbar = new v1_16_R3_Actionbar();
-                    break;
-            }
-
-            ggActionbar.send(this.player, text);
-
-        }catch (ArrayIndexOutOfBoundsException ex){
-            ex.printStackTrace();
-        }
+        GunGame.getInstance().getActionbar().send(this.player, text);
     }
 
     public void sendScoreBoard() {
-        GGScoreboard ggScoreboard = null;
-        String version = "N/A";
-        try{
-            version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-
-            switch (version) {
-                case "v1_8_R3":
-                    ggScoreboard = new v1_8_R3_Scoreboard();
-                    break;
-                case "v1_9_R2":
-                    ggScoreboard = new v1_9_R2_Scoreboard();
-                    break;
-                case "v1_10_R1":
-                    ggScoreboard = new v1_10_R1_Scoreboard();
-                    break;
-                case "v1_11_R1":
-                    ggScoreboard = new v1_11_R1_Scoreboard();
-                    break;
-                case "v1_12_R1":
-                    ggScoreboard = new v1_12_R1_Scoreboard();
-                    break;
-                case "v1_13_R2":
-                    ggScoreboard = new v1_13_R2_Scoreboard();
-                    break;
-                case "v1_14_R1":
-                    ggScoreboard = new v1_14_R1_GunGame();
-                    break;
-                case "v1_15_R1":
-                    ggScoreboard = new v1_15_R1_Scoreboard();
-                    break;
-                case "v1_16_R3":
-                    ggScoreboard = new v1_16_R3_Scoreboard();
-                    break;
-            }
-
-            ggScoreboard.sendScoreboard(this.player);
-
-        }catch (ArrayIndexOutOfBoundsException ex){
-            ex.printStackTrace();
-        }
+        GunGame.getInstance().getScoreboard().sendScoreboard(this.player);
     }
 
 
