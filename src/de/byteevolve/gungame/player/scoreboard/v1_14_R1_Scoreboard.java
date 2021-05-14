@@ -8,7 +8,7 @@ import net.minecraft.server.v1_14_R1.*;
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-public class v1_14_R1_GunGame implements GGScoreboard{
+public class v1_14_R1_Scoreboard implements GGScoreboard{
 
     @Override
     public void sendScoreboard(Player player) {
