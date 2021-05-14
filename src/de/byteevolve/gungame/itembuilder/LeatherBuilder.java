@@ -1,5 +1,6 @@
 package de.byteevolve.gungame.itembuilder;
 
+import de.byteevolve.gungame.GunGame;
 import de.byteevolve.gungame.itembuilder.unbreakable.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -33,48 +34,7 @@ public class LeatherBuilder {
         ItemStack itemStack = new ItemStack(this.material, this.count);
 
         if(this.unbreakable) {
-            Unbreakable unbreakable = null;
-
-            String version = "N/A";
-            try {
-                version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-
-                switch (version) {
-                    case "v1_8_R3":
-                        unbreakable = new v1_8_R3_Unbreakable();
-                        break;
-                    case "v1_9_R2":
-                        unbreakable = new v1_9_R2_Unbreakable();
-                        break;
-                    case "v1_10_R1":
-                        unbreakable = new v1_10_R1_Unbreakable();
-                        break;
-                    case "v1_11_R1":
-                        unbreakable = new v1_11_R1_Unbreakable();
-                        break;
-                    case "v1_12_R1":
-                        unbreakable = new v1_12_R1_Unbreakable();
-                        break;
-                    case "v1_13_R2":
-                        unbreakable = new v1_13_R2_Unbreakable();
-                        break;
-                    case "v1_14_R1":
-                        unbreakable = new v1_14_R1_Unbreakable();
-                        break;
-                    case "v1_15_R1":
-                        unbreakable = new v1_15_R1_Unbreakable();
-                        break;
-                    case "v1_16_R3":
-                        unbreakable = new v1_16_R3_Unbreakable();
-                        break;
-                }
-
-                itemStack = unbreakable.makeUnbreakable(itemStack);
-
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                ex.printStackTrace();
-            }
-
+            itemStack = GunGame.getInstance().getUnbreakable().makeUnbreakable(itemStack);
         }
 
         LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemStack.getItemMeta();
