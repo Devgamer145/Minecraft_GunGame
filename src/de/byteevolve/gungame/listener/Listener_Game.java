@@ -9,9 +9,11 @@ import de.byteevolve.gungame.player.PlayerStats;
 import de.byteevolve.gungame.player.PlayerStatsType;
 import de.byteevolve.gungame.sound.Sounds;
 import de.byteevolve.gungame.team.Team;
+import net.minecraft.server.v1_16_R3.PacketPlayInClientCommand;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,6 +46,8 @@ public class Listener_Game implements Listener {
                     event.setCancelled(true);
                 }
             }
+        }else{
+            event.setCancelled(true);
         }
     }
 
@@ -99,8 +103,8 @@ public class Listener_Game implements Listener {
             playerStats.add(PlayerStatsType.POINTS, 10);
             if(playerStats.get(PlayerStatsType.HIGHSCORE) < newKitKiller.getId()) playerStats.set(PlayerStatsType.HIGHSCORE, newKitKiller.getId());
             new PlayerHandler(killer).sendScoreBoard();
-
             killer.setLevel(newKitKiller.getId());
+            killer.setMaxHealth(20);
             killer.setHealth(20);
             killer.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.KILLERKILLS.getAsString().replaceAll("%PLAYER%", player.getDisplayName()));
             Sounds.LEVEL_UP.play(killer, 10, 10);
@@ -108,7 +112,12 @@ public class Listener_Game implements Listener {
         }else{
             player.sendMessage(GunGame.getInstance().getPrefix() + ConfigEntries.PLAYERDEAD.getAsString());
         }
-        player.setVelocity(new Vector(0, 0, 0));    }
+        player.setVelocity(new Vector(0, 0, 0));
+        new PlayerHandler(player).respawnPlayer();
+
+    }
+
+
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event){
