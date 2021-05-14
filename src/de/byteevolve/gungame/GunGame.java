@@ -10,9 +10,13 @@ import de.byteevolve.gungame.configuration.ConfigHandler;
 import de.byteevolve.gungame.configuration.config.ConfigEntries;
 import de.byteevolve.gungame.database.MySQL;
 import de.byteevolve.gungame.game.GameHandler;
+import de.byteevolve.gungame.itembuilder.unbreakable.*;
 import de.byteevolve.gungame.kit.Kit;
 import de.byteevolve.gungame.listener.*;
 import de.byteevolve.gungame.location.LocationHandler;
+import de.byteevolve.gungame.player.actionbar.*;
+import de.byteevolve.gungame.player.respawn.*;
+import de.byteevolve.gungame.player.scoreboard.*;
 import de.byteevolve.gungame.team.TeamHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -36,6 +40,10 @@ public class GunGame extends JavaPlugin {
     private String prefix,noPerm, mustAPlayer,playerNotOnline;
     private List<UUID> build;
     private ConfigHandler configHandler;
+    private GGRespawn respawn;
+    private GGActionbar actionbar;
+    private GGScoreboard scoreboard;
+    private Unbreakable unbreakable;
 
 
     @Override
@@ -57,6 +65,8 @@ public class GunGame extends JavaPlugin {
             this.gameHandler = new GameHandler();
             this.teamHandler = new TeamHandler();
             this.build = new ArrayList<>();
+
+            this.loadVersions();
 
             if (!this.arenaHandler.getArenas().isEmpty()) {
                 this.gameHandler.startGameTimer();
@@ -100,11 +110,93 @@ public class GunGame extends JavaPlugin {
         }
     }
 
+    private void loadVersions(){
+        String version = "N/A";
+        try{
+            version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+
+            switch (version) {
+                case "v1_8_R3":
+                    this.actionbar = new v1_8_R3_Actionbar();
+                    this.scoreboard = new v1_8_R3_Scoreboard();
+                    this.respawn = new v1_8_R3_Respawn();
+                    this.unbreakable = new v1_8_R3_Unbreakable();
+                    break;
+                case "v1_9_R2":
+                    this.actionbar = new v1_9_R2_Actionbar();
+                    this.scoreboard = new v1_9_R2_Scoreboard();
+                    this.respawn = new v1_9_R2_Respawn();
+                    this.unbreakable = new v1_9_R2_Unbreakable();
+                    break;
+                case "v1_10_R1":
+                    this.actionbar = new v1_10_R1_Actionbar();
+                    this.scoreboard = new v1_10_R1_Scoreboard();
+                    this.respawn = new v1_10_R1_Respawn();
+                    this.unbreakable = new v1_10_R1_Unbreakable();
+                    break;
+                case "v1_11_R1":
+                    this.actionbar = new v1_11_R1_Actionbar();
+                    this.scoreboard = new v1_11_R1_Scoreboard();
+                    this.respawn = new v1_11_R1_Respawn();
+                    this.unbreakable = new v1_11_R1_Unbreakable();
+                    break;
+                case "v1_12_R1":
+                    this.actionbar = new v1_12_R1_Actionbar();
+                    this.scoreboard = new v1_12_R1_Scoreboard();
+                    this.respawn = new v1_12_R1_Respawn();
+                    this.unbreakable = new v1_12_R1_Unbreakable();
+                    break;
+                case "v1_13_R2":
+                    this.actionbar = new v1_13_R2_Actionbar();
+                    this.scoreboard = new v1_13_R2_Scoreboard();
+                    this.respawn = new v1_13_R2_Respawn();
+                    this.unbreakable = new v1_13_R2_Unbreakable();
+                    break;
+                case "v1_14_R1":
+                    this.actionbar = new v1_14_R1_Actionbar();
+                    this.scoreboard = new v1_14_R1_Scoreboard();
+                    this.respawn = new v1_14_R1_Respawn();
+                    this.unbreakable = new v1_14_R1_Unbreakable();
+                    break;
+                case "v1_15_R1":
+                    this.actionbar = new v1_15_R1_Actionbar();
+                    this.scoreboard = new v1_15_R1_Scoreboard();
+                    this.respawn = new v1_15_R1_Respawn();
+                    this.unbreakable = new v1_15_R1_Unbreakable();
+                    break;
+                case "v1_16_R3_Respawn":
+                    this.actionbar = new v1_16_R3_Actionbar();
+                    this.scoreboard = new v1_16_R3_Scoreboard();
+                    this.respawn = new v1_16_R3_Respawn();
+                    this.unbreakable = new v1_16_R3_Unbreakable();
+                    break;
+            }
+        }catch (ArrayIndexOutOfBoundsException ex){
+            ex.printStackTrace();
+        }
+    }
+
     @Override
     public void onDisable() {
         if(this.mySQL != null) {
             if (this.mySQL.isConnected()) this.mySQL.close();
         }
+    }
+
+    public GGRespawn getRespawn() {
+        return respawn;
+    }
+
+    public GGActionbar getActionbar() {
+        return actionbar;
+    }
+
+    public GGScoreboard getScoreboard() {
+        return scoreboard;
+    }
+
+    public Unbreakable getUnbreakable() {
+        return unbreakable;
     }
 
     public TeamHandler getTeamHandler() {
