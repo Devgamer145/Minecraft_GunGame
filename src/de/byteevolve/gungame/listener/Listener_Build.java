@@ -41,7 +41,11 @@ public class Listener_Build implements Listener {
             }
         }
         if (event.getClickedBlock() != null) {
-            if (event.getClickedBlock().getType() == Material.CHEST) {
+            if (event.getClickedBlock().getType() == Material.CHEST
+                    ||event.getClickedBlock().getType() == Material.FURNACE
+                    || event.getClickedBlock().getType() == Material.BURNING_FURNACE
+                    || event.getClickedBlock().getType() == Material.DROPPER
+                    ||event.getClickedBlock().getType() == Material.DISPENSER) {
                 event.setCancelled(true);
                 event.getPlayer().closeInventory();
             }
