@@ -164,7 +164,7 @@ public class GunGame extends JavaPlugin {
                     this.respawn = new v1_15_R1_Respawn();
                     this.unbreakable = new v1_15_R1_Unbreakable();
                     break;
-                case "v1_16_R3_Respawn":
+                case "v1_16_R3":
                     this.actionbar = new v1_16_R3_Actionbar();
                     this.scoreboard = new v1_16_R3_Scoreboard();
                     this.respawn = new v1_16_R3_Respawn();
