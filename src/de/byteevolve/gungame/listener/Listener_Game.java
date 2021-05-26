@@ -131,7 +131,7 @@ public class Listener_Game implements Listener {
                 newKit.getKitInventory().load(player);
                 player.setLevel(newKit.getId());
             }
-        }.runTaskLater(GunGame.getInstance(), 10);
+        }.runTaskLater(GunGame.getInstance(), 3);
         PlayerStats playerStats = new PlayerStats(player.getUniqueId().toString());
         playerStats.add(PlayerStatsType.DEATHS, 1);
         playerStats.remove(PlayerStatsType.POINTS, 5);
